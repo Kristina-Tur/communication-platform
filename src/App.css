@@ -1,3 +1,4 @@
+/*
 .App-wrapper {
     display: grid;
     grid-template-areas:
@@ -21,4 +22,33 @@
 .content {
     grid-area: content;
     background-color: bisque;
+}*/
+*,
+::before,
+::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Roboto',  sans-serif;
+    line-height: 1.2;
+    font-weight: 600;
+}
+
+a {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+button {
+    background-color: unset;
+    border: none;
+    cursor: pointer;
+}
+
+ul {
+    list-style-type: none;
 }
