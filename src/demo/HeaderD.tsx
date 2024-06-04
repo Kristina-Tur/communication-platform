@@ -1,11 +1,11 @@
 import React from 'react';
 import logo from "../images/twitterLOGO.svg";
-import avatar from "../images/avatar-svgrepo-com.svg";
+import avatar from "../images/avatar.svg";
 import styled from "styled-components";
 import {Theme} from "../styles/Theme";
 
 
-export const Header = () => {
+export const HeaderD = () => {
     return (
         <SHeader>
             <Container>
