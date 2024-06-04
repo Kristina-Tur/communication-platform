@@ -1,154 +1,81 @@
 import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
 import './App.css';
-import logo from './images/twitterLOGO.svg'
+import {Header} from "./layout/Header";
+import { List, ListItem, AppBar, Toolbar, Typography, Drawer, ListItemText, Grid, Card, CardContent, CardActions, Button } from '@mui/material';
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import InboxIcon from "@mui/icons-material/MoveToInbox";
+import MailIcon from "@mui/icons-material/Mail";
 import styled from "styled-components";
-
-const pages = ['Products', 'Pricing', 'Blog'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+import logo from "./images/twitterLOGO.svg";
+import bg from "./images/Screenshot024-06-02155948.png";
+import {List1} from "./layout/list";
 
 function App() {
-    const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
-    const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
-
-    const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-        setAnchorElNav(event.currentTarget);
-    };
-    const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-        setAnchorElUser(event.currentTarget);
-    };
-
-    const handleCloseNavMenu = () => {
-        setAnchorElNav(null);
-    };
-
-    const handleCloseUserMenu = () => {
-        setAnchorElUser(null);
-    };
-
-    return (
-        <AppBar position="static">
-            <Container maxWidth="xl">
-                <Toolbar disableGutters>
-                    <a href={'#'}>
-                        <Logo src={logo} alt={logo}/>
-                    </a>
-                    <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-                        <IconButton
-                            size="large"
-                            aria-label="account of current user"
-                            aria-controls="menu-appbar"
-                            aria-haspopup="true"
-                            onClick={handleOpenNavMenu}
-                            color="inherit"
-                        >
-                            <MenuIcon />
-                        </IconButton>
-                        <Menu
-                            id="menu-appbar"
-                            anchorEl={anchorElNav}
-                            anchorOrigin={{
-                                vertical: 'bottom',
-                                horizontal: 'left',
-                            }}
-                            keepMounted
-                            transformOrigin={{
-                                vertical: 'top',
-                                horizontal: 'left',
-                            }}
-                            open={Boolean(anchorElNav)}
-                            onClose={handleCloseNavMenu}
-                            sx={{
-                                display: { xs: 'block', md: 'none' },
-                            }}
-                        >
-                            {pages.map((page) => (
-                                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                                    <Typography textAlign="center">{page}</Typography>
-                                </MenuItem>
-                            ))}
-                        </Menu>
-                    </Box>
-                    <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
-                    <Typography
-                        variant="h5"
-                        noWrap
-                        component="a"
-                        href="#app-bar-with-responsive-menu"
-                        sx={{
-                            mr: 2,
-                            display: { xs: 'flex', md: 'none' },
-                            flexGrow: 1,
-                            fontFamily: 'monospace',
-                            fontWeight: 700,
-                            letterSpacing: '.3rem',
-                            color: 'inherit',
-                            textDecoration: 'none',
-                        }}
-                    >
-                        LOGO
-                    </Typography>
-                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                        {pages.map((page) => (
-                            <Button
-                                key={page}
-                                onClick={handleCloseNavMenu}
-                                sx={{ my: 2, color: 'white', display: 'block' }}
-                            >
-                                {page}
-                            </Button>
-                        ))}
-                    </Box>
-
-                    <Box sx={{ flexGrow: 0 }}>
-                        <Tooltip title="Open settings">
-                            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-                            </IconButton>
-                        </Tooltip>
-                        <Menu
-                            sx={{ mt: '45px' }}
-                            id="menu-appbar"
-                            anchorEl={anchorElUser}
-                            anchorOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                            }}
-                            keepMounted
-                            transformOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                            }}
-                            open={Boolean(anchorElUser)}
-                            onClose={handleCloseUserMenu}
-                        >
-                            {settings.map((setting) => (
-                                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                                    <Typography textAlign="center">{setting}</Typography>
-                                </MenuItem>
-                            ))}
-                        </Menu>
-                    </Box>
-                </Toolbar>
-            </Container>
-        </AppBar>
+    return (<>
+            {/*<Header/>*/}
+            {/*<TemporaryDrawer/>*/}
+            <div>
+                <AppBar position="static">
+                    <Toolbar sx={{
+                        display: 'flex',
+                        justifyContent: 'end',
+                        gap: '20px',
+                        backgroundColor: '#fff',
+                        color: '#000'
+                    }}>
+                        <List1/>
+                    </Toolbar>
+                </AppBar>
+                <Grid container spacing={2} sx={{
+                    maxHeight: '200px',
+                    backgroundImage: `url(${bg})`,
+                    backgroundSize: 'cover',
+                    backgroundRepeat: 'no-repeat',
+                }}>
+                    <Grid item xs={3}>
+                        <Drawer sx={{width: 250}} variant="permanent" anchor="left">
+                            <a href={'#'}>
+                                <Logo src={logo} alt={'logo'}/>
+                            </a>
+                            <List>
+                                {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+                                    <ListItem key={text} disablePadding>
+                                        <ListItemButton>
+                                            <ListItemIcon>
+                                                {index % 2 === 0 ? <InboxIcon/> : <MailIcon/>}
+                                            </ListItemIcon>
+                                            <ListItemText primary={text}/>
+                                        </ListItemButton>
+                                    </ListItem>
+                                ))}
+                            </List>
+                        </Drawer>
+                    </Grid>
+                    <Grid item xs={6}>
+                        <Card sx={{marginTop: '150px'}}>
+                            <CardContent>
+                                <Typography variant="h5">Заголовок поста</Typography>
+                                <Typography variant="body2">Текст поста...</Typography>
+                            </CardContent>
+                            <CardActions>
+                                <Button size="small">Нравится</Button>
+                                <Button size="small">Комментировать</Button>
+                            </CardActions>
+                        </Card>
+                    </Grid>
+                    <Grid item xs={3}>
+                        {/* Сюда можно добавить что-то ещё, например список друзей, рекламу и т.д. */}
+                    </Grid>
+                </Grid>
+            </div>
+        </>
     );
 }
 
 export default App;
 
+
 const Logo = styled.img`
-    max-width: 50px;
+    max-width: 30px;
 `

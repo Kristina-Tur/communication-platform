@@ -2,6 +2,7 @@ export const Theme = {
     colors: {
         primaryBg: '#343549',
         secondary: '#ffffff',
+        neutral: '#959596'
     }
         /*accent: 'linear-gradient(270deg, #13ADC7 0%, #6978D1 66.67%, #945DD6 100%)',
         translucentAccent: 'linear-gradient(270deg,rgba(115, 201, 236, .5), rgba(163, 108, 225, .5))',
