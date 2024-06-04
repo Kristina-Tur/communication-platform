@@ -7,9 +7,16 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import styled from "styled-components";
+import {v1} from "uuid";
 
 type Props = {};
-export const Sidebar = (props: Props) => {
+export const Navbar = (props: Props) => {
+
+    const nav = [
+        {id: v1(), title: 'Profile', href: '/profile'},
+        {id: v1(), title: 'Dialogs', href: '/dialogs'},
+    ]
+
     return (
         <Grid>
             <Drawer sx={{width: 250}} variant="permanent" anchor="left">
@@ -17,13 +24,13 @@ export const Sidebar = (props: Props) => {
                     <Logo src={logo} alt={'logo'}/>
                 </a>
                 <List>
-                    {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                        <ListItem key={text} disablePadding>
-                            <ListItemButton>
+                    {nav.map((nav, index) => (
+                        <ListItem key={nav.id} disablePadding>
+                            <ListItemButton href={nav.href}>
                                 <ListItemIcon>
                                     {index % 2 === 0 ? <InboxIcon/> : <MailIcon/>}
                                 </ListItemIcon>
-                                <ListItemText primary={text}/>
+                                <ListItemText primary={nav.title}/>
                             </ListItemButton>
                         </ListItem>
                     ))}

@@ -7,7 +7,7 @@ type Props = {
 };
 export const Posts = (props: Props) => {
     return (
-        <Grid item >
+        <Grid sx={{marginBottom: '50px'}}>
             <Card>
                 <CardContent>
                     <Typography variant="h5">Post title</Typography>

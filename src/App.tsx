@@ -4,31 +4,24 @@ import {
     Grid,
 } from '@mui/material';
 import bg from "./images/bg.png";
-import Profile from "./Profile";
+import Profile from "./layout/Sections/Profile/Profile";
 import {Header} from "./layout/Header/Header";
-import {Sidebar} from "./layout/Sections/Sidebar/Sidebar";
 import {Posts} from "./layout/Sections/Posts/Posts";
-import {PostInput} from "./PostInput";
+import {PostInput} from "./layout/Sections/Posts/PostInput";
+import {Navbar} from "./layout/Sections/Navbar/Navbar";
+import {BrowserRouter, Route} from "react-router-dom";
+import {Dialogs} from "./layout/Sections/Dialogs/Dialogs";
 
 function App() {
-    return (<>
-            <Header/>
-            <Sidebar/>
-            <Grid container spacing={2} sx={{
-                backgroundImage: `url(${bg})`,
-                backgroundSize: 'contain',
-                backgroundRepeat: 'no-repeat',
-                justifyContent: 'center',
-                backgroundColor: '#c8e0ff33',
-                height: '100vh'
-            }}>
-                <Profile/>
-                <Grid xs={6}>
-                    <PostInput/>
-                    <Posts/>
-                </Grid>
+    return (
+        <BrowserRouter>
+            <Grid>
+                <Header/>
+                <Navbar/>
+                <Route path={'/profile'} component={Profile}/>
+                <Route path={'/dialogs'} component={Dialogs}/>
             </Grid>
-        </>
+        </BrowserRouter>
     );
 }
 
