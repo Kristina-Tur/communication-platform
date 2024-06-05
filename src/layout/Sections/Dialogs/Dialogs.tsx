@@ -4,6 +4,7 @@ import {MessageForm} from "./MessageForm";
 import {DialogList} from "./DialogList";
 import {MessageList} from "./MessageList";
 import styled from "styled-components";
+import {MessageListD} from "./MessageListD";
 
 type Props = {};
 export const Dialogs = (props: Props) => {
@@ -11,7 +12,7 @@ export const Dialogs = (props: Props) => {
         <div style={{marginLeft: '250px'}}>
             <Wrapper>
                 <DialogList/>
-                <MessageList/>
+                <MessageListD/>
             </Wrapper>
 
             <MessageForm/>
