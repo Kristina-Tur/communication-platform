@@ -15,12 +15,10 @@ import {Dialogs} from "./layout/Sections/Dialogs/Dialogs";
 function App() {
     return (
         <BrowserRouter>
-            <Grid>
                 <Header/>
                 <Navbar/>
                 <Route path={'/profile'} component={Profile}/>
                 <Route path={'/dialogs'} component={Dialogs}/>
-            </Grid>
         </BrowserRouter>
     );
 }

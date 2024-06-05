@@ -8,6 +8,8 @@ import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import styled from "styled-components";
 import {v1} from "uuid";
+import {NavLink} from "react-router-dom";
+import s from './Navbar.module.css'
 
 type Props = {};
 export const Navbar = (props: Props) => {
@@ -17,26 +19,26 @@ export const Navbar = (props: Props) => {
         {id: v1(), title: 'Dialogs', href: '/dialogs'},
     ]
 
+
     return (
-        <Grid>
-            <Drawer sx={{width: 250}} variant="permanent" anchor="left">
-                <a href={'#'}>
+            <Drawer sx={{ width: 200, '& .MuiDrawer-paper': { width: 200, padding: '20px'},  }}
+                    variant="permanent" anchor="left">
+                <a href={'#'} style={{marginBottom: '20px'}}>
                     <Logo src={logo} alt={'logo'}/>
                 </a>
                 <List>
                     {nav.map((nav, index) => (
-                        <ListItem key={nav.id} disablePadding>
-                            <ListItemButton href={nav.href}>
-                                <ListItemIcon>
-                                    {index % 2 === 0 ? <InboxIcon/> : <MailIcon/>}
-                                </ListItemIcon>
-                                <ListItemText primary={nav.title}/>
-                            </ListItemButton>
+                        <ListItem key={nav.id} disablePadding className={s.item}>
+                               <NavLink to={nav.href} style={{display: 'flex'}}>
+                                    <ListItemIcon>
+                                        {index % 2 === 0 ? <InboxIcon/> : <MailIcon/>}
+                                    </ListItemIcon>
+                                    <ListItemText primary={nav.title}/>
+                                </NavLink>
                         </ListItem>
                     ))}
                 </List>
             </Drawer>
-        </Grid>
     );
 };
 
