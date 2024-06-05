@@ -1,6 +1,6 @@
 import React from 'react'
 import s from './FriendMessage.module.css'
-import {MessageType} from './MessageListD';
+import {MessageType} from './MessageList';
 
 type FriendMessagePropsType = {
     message: MessageType

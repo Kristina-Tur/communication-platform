@@ -1,6 +1,6 @@
 import React from 'react'
 import s from './Message.module.css'
-import {MessageType} from './MessageListD';
+import {MessageType} from './MessageList';
 
 // нужно создать правильный тип вместо any
 export type MessagePropsType = {

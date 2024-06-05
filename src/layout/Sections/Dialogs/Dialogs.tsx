@@ -1,18 +1,22 @@
 // @flow
 import * as React from 'react';
 import {MessageForm} from "./MessageForm";
-import {DialogList} from "./DialogList";
-import {MessageList} from "./MessageList";
+import {DialogList, DialogListType} from "./DialogList";
 import styled from "styled-components";
-import {MessageListD} from "./MessageListD";
+import {MessageList, MessageType} from "./MessageList";
 
-type Props = {};
-export const Dialogs = (props: Props) => {
+export type DialogsProps = {
+    dialogs: DialogListType[]
+    message: MessageType
+    friendMessage: MessageType
+};
+
+export const Dialogs = ({dialogs, message, friendMessage}: DialogsProps) => {
     return (
         <div style={{marginLeft: '250px'}}>
             <Wrapper>
-                <DialogList/>
-                <MessageListD/>
+                <DialogList dialogs={dialogs}/>
+                <MessageList message={message} friendMessage={friendMessage}/>
             </Wrapper>
 
             <MessageForm/>

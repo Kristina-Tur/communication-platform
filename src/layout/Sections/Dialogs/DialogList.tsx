@@ -1,20 +1,21 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import ListItem from "@mui/material/ListItem";
 import List from "@mui/material/List";
 import {Avatar, ListItemAvatar} from "@mui/material";
 import ListItemText from "@mui/material/ListItemText";
 import Divider from "@mui/material/Divider";
 
-const dialogs = [
-    { id: 1, name: 'Max', avatar: 'https://via.placeholder.com/150/92c952' },
-    { id: 2, name: 'John', avatar: 'https://via.placeholder.com/150/771796' },
-    { id: 3, name: 'Mike', avatar: 'https://via.placeholder.com/150/24f355' },
-    { id: 4, name: 'Jane', avatar: 'https://via.placeholder.com/150/771796' },
-    { id: 5, name: 'Mike', avatar: 'https://via.placeholder.com/150/24f355' },
-    { id: 6, name: 'Alex', avatar: 'https://via.placeholder.com/150/92c952'  },
-];
+type Props = {
+    dialogs: DialogListType[]
+};
 
-export const DialogList = () => {
+export type DialogListType = {
+    id: number
+    name: string
+    avatar: string
+}
+
+export const DialogList = ({dialogs}: Props) => {
     const [selectedDialog, setSelectedDialog] = useState(null);
 
     const handleDialogClick = (dialog: any) => {
@@ -22,7 +23,7 @@ export const DialogList = () => {
     };
 
     return (
-        <List sx={{ maxWidth: 360, marginTop: '50px'}}>
+        <List sx={{maxWidth: 360, marginTop: '50px'}}>
             {dialogs.map((dialog) => (
                 <ListItem
                     key={dialog.id}
@@ -39,9 +40,9 @@ export const DialogList = () => {
                     }}
                 >
                     <ListItemAvatar>
-                        <Avatar alt={dialog.name} src={dialog.avatar} />
+                        <Avatar alt={dialog.name} src={dialog.avatar}/>
                     </ListItemAvatar>
-                    <ListItemText primary={dialog.name} />
+                    <ListItemText primary={dialog.name}/>
                 </ListItem>
             ))}
 
