@@ -1,6 +1,6 @@
 import React from 'react'
 import s2 from './App.module.css'
-import avatar from './../../../images/avatar.png'
+import avatar from '../../../assets/images/avatar.png'
 import Message from "./Message";
 import FriendMessage from "./FriendMessage";
 

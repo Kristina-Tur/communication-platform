@@ -1,7 +1,0 @@
-.item a{
-    color: black;
-}
-
-.item a:focus{
-    color: rgba(27, 157, 246, 0.5);
-}

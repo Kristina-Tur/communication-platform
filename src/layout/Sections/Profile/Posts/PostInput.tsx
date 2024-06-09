@@ -4,6 +4,7 @@ import {Typography, Badge} from '@mui/material';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import ImageIcon from '@mui/icons-material/Image';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import styled from "styled-components";
 
 export const PostInput = () => {
     const [postContent, setPostContent] = useState('');
@@ -18,7 +19,7 @@ export const PostInput = () => {
     };
 
     return (
-        <Grid item  sx={{marginTop: '155px', marginBottom: '50px'}}>
+        <PostInputWrapper>
             <AppBar position="static" sx={{
                 backgroundColor: '#fff',
                 borderRadius: '5px',
@@ -30,20 +31,20 @@ export const PostInput = () => {
                         <TwitterIcon/>
                     </IconButton>
                     <Typography variant="h6" style={{flexGrow: 1}}>
-                        Home
+                        My posts
                     </Typography>
                     <IconButton color="inherit">
-                        <Badge badgeContent={4} color="secondary">
+                        <Badge badgeContent={4} color="primary">
                             <TwitterIcon/>
                         </Badge>
                     </IconButton>
                     <IconButton color="inherit">
-                        <Badge badgeContent={2} color="secondary">
+                        <Badge badgeContent={2} color="primary">
                             <ImageIcon/>
                         </Badge>
                     </IconButton>
                     <IconButton color="inherit">
-                        <Badge badgeContent={5} color="secondary">
+                        <Badge badgeContent={5} color="primary">
                             <FavoriteBorderIcon/>
                         </Badge>
                     </IconButton>
@@ -68,6 +69,11 @@ export const PostInput = () => {
             >
                 Publish
             </Button>
-        </Grid>
+        </PostInputWrapper>
     );
 };
+
+const PostInputWrapper = styled.div`
+    max-width: 750px;
+    width: 100%;
+`

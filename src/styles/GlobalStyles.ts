@@ -26,6 +26,21 @@ export const GlobalStyles = createGlobalStyle`
   
 }
 
+    a {
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    button {
+        background-color: unset;
+        border: none;
+        cursor: pointer;
+    }
+
+    ul {
+        list-style-type: none;
+    }
+
 /*.App-wrapper {
   width: 1170px;
   margin: 0 auto;
