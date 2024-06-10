@@ -3,7 +3,9 @@ import {PostInput} from "./Posts/PostInput";
 import bg from "../../../assets/images/bg.png";
 import styled from "styled-components";
 import {FlexWrapper} from "../../../components/FlexWrapper";
-import {CardProfile} from "./Card/Card";
+import {CardProfile} from "./CardProfile/CardProfile";
+import Button from '@mui/material/Button';
+
 
 export const Profile = () => {
     return (
@@ -16,6 +18,7 @@ export const Profile = () => {
                 <Posts/>
                 <Posts/>
             </PostsWrapper>
+            <Button variant="outlined" sx={{color: 'green', p: '100px'}}>Contained</Button>
         </Section>
     );
 };
@@ -26,7 +29,7 @@ const Section = styled.section`
     background-repeat: no-repeat;
     background-color: #c8e0ff33;
 
-    padding-top: 140px;
+    padding-top: 135px;
     flex-grow: 1;
 `
 
