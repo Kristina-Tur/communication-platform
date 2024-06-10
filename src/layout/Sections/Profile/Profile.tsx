@@ -4,7 +4,6 @@ import bg from "../../../assets/images/bg.png";
 import styled from "styled-components";
 import {FlexWrapper} from "../../../components/FlexWrapper";
 import {CardProfile} from "./CardProfile/CardProfile";
-import Button from '@mui/material/Button';
 
 
 export const Profile = () => {
@@ -18,7 +17,6 @@ export const Profile = () => {
                 <Posts/>
                 <Posts/>
             </PostsWrapper>
-            <Button variant="outlined" sx={{color: 'green', p: '100px'}}>Contained</Button>
         </Section>
     );
 };

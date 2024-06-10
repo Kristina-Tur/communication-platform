@@ -1,14 +1,17 @@
 // @flow
 import * as React from 'react';
-import {Button, Card, CardActions, CardContent, Grid, Typography} from "@mui/material";
+import Typography from "@mui/material/Typography";
+import Button from '@mui/material/Button';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
 
 type Props = {
 
 };
 export const Posts = (props: Props) => {
     return (
-        <Grid sx={{marginBottom: '50px'}}>
-            <Card>
+            <Card sx={{marginBottom: '50px'}}>
                 <CardContent>
                     <Typography variant="h5">Post title</Typography>
                     <Typography variant="body2">Post text...</Typography>
@@ -18,6 +21,5 @@ export const Posts = (props: Props) => {
                     <Button size="small">Comment</Button>
                 </CardActions>
             </Card>
-        </Grid>
     );
 };
