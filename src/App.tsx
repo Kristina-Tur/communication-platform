@@ -1,12 +1,10 @@
 import * as React from 'react';
-import './App.css';
 import {Header} from "./layout/header/Header";
 import avatar from "./assets/images/avatar.png";
 import {MessageType} from "./layout/sections/Dialogs/MessageList";
 import {DialogListType} from "./layout/sections/Dialogs/DialogList";
 import {Navigation} from "./layout/sections/Navigation/Navigation";
 import {Profile} from "./layout/sections/Profile/Profile";
-import {GlobalStyles} from "./styles/GlobalStyles";
 import {BrowserRouter} from "react-router-dom";
 import styled from "styled-components";
 
