@@ -1,41 +1,26 @@
-import React from 'react'
-import {NavLink} from 'react-router-dom'
-import styled from 'styled-components'
+import React from "react";
+import { S } from "./Navigation_styles";
 
-export function Navigation() {
+export const Navigation = () => {
     return (
-        <nav className='nav' style={{flexShrink: '0', maxWidth: '200px', width: '100%'}}>
-            <StyledUl>
-                <StyledLi>
-                    <StyledLink to='/profile'>Profile</StyledLink>
-                </StyledLi>
-                <StyledLi><StyledLink to='/dialogs'>Messages</StyledLink> </StyledLi>
-                <StyledLi><StyledLink to='/news'>News</StyledLink> </StyledLi>
-                <StyledLi><StyledLink to='/music'>Music</StyledLink> </StyledLi>
-                <StyledLi><StyledLink to='/settings'>Settings</StyledLink> </StyledLi>
-            </StyledUl>
-        </nav>
-    )
-}
-
-const StyledUl = styled.ul`
-    list-style-type: none;
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    background-color: white;
-`
-
-const StyledLi = styled.li`
-    cursor: pointer;
-    text-decoration: none;
-`
-const StyledLink = styled(NavLink)`
-    color: black;
-    cursor: pointer;
-    text-decoration: none;
-
-    &.active {
-        color: rgb(4, 149, 159);
-    }
-`
+        <S.Nav>
+            <S.Ul>
+                <S.Li>
+                    <S.Link to="/profile">Profile</S.Link>
+                </S.Li>
+                <S.Li>
+                    <S.Link to="/dialogs">Messages</S.Link>
+                </S.Li>
+                <S.Li>
+                    <S.Link to="/news">News</S.Link>
+                </S.Li>
+                <S.Li>
+                    <S.Link to="/music">Music</S.Link>
+                </S.Li>
+                <S.Li>
+                    <S.Link to="/settings">Settings</S.Link>
+                </S.Li>
+            </S.Ul>
+        </S.Nav>
+    );
+};

@@ -12,7 +12,7 @@ import Badge from '@mui/material/Badge';
 import {ToolbarSx} from "./PostInput.styles";
 
 type PostInputPropsType = {
-    addPost: (postContent: string) => void
+    addPost: (value: string) => void
 }
 
 export const PostInput = ({addPost}: PostInputPropsType) => {

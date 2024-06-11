@@ -5,9 +5,16 @@ import {MessageType} from "./layout/sections/Dialogs/MessageList";
 import {DialogListType} from "./layout/sections/Dialogs/DialogList";
 import {Navigation} from "./layout/sections/Navigation/Navigation";
 import {Profile} from "./layout/sections/Profile/Profile";
-import {BrowserRouter} from "react-router-dom";
+import { Route} from "react-router-dom";
 import styled from "styled-components";
+import {Dialogs} from "./layout/sections/Dialogs/Dialogs";
+import {useState} from "react";
+import {v1} from "uuid";
 
+export type PostsType = {
+    id: string
+    postText: string
+}
 
 function App() {
     const dialogs: DialogListType[] = [
@@ -18,8 +25,6 @@ function App() {
         {id: 5, name: 'Mike', avatar: 'https://via.placeholder.com/150/24f355'},
         {id: 6, name: 'Alex', avatar: 'https://via.placeholder.com/150/92c952'},
     ];
-
-
     const message: MessageType = {
         id: 0,
         user: {
@@ -43,21 +48,36 @@ function App() {
         },
     }
 
+    const [posts, setPosts] = useState<PostsType[]>([
+        {id: v1(), postText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'},
+        {
+            id: v1(),
+            postText: ' Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus laciniaodio vitae vestibulum vestibulum.'
+        },
+    ])
+
+    const addPost = (value: string) => {
+        const newPost = {id: v1(), postText: value}
+        setPosts([newPost, ...posts])
+    }
     return (
-        <BrowserRouter>
+        <div>
             <Header/>
             <ContentWrapper>
                 <Navigation/>
-                <Profile/>
-            </ContentWrapper>
-            {/*<Route path={'/profile'} component={Profile}/>
+                <Route path={'/profile'} render={() => <Profile
+                    posts={posts}
+                    addPost={addPost}
+                />}/>
                 <Route path={'/dialogs'} render={() => <Dialogs
                     dialogs={dialogs}
                     message={message}
                     friendMessage={friendMessage}
                 />}
-                />*/}
-        </BrowserRouter>
+                />
+            </ContentWrapper>
+
+        </div>
     );
 }
 
