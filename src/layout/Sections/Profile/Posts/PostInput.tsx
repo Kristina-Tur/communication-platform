@@ -9,26 +9,29 @@ import Button from '@mui/material/Button';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Badge from '@mui/material/Badge';
+import {ToolbarSx} from "./PostInput.styles";
 
-export const PostInput = () => {
+type PostInputPropsType = {
+    addPost: (postContent: string) => void
+}
+
+export const PostInput = ({addPost}: PostInputPropsType) => {
     const [postContent, setPostContent] = useState('');
+    console.log(postContent)
 
     const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
         setPostContent(event.currentTarget.value);
+        console.log(postContent)
     };
 
     const handleSubmit = () => {
-        // Здесь можно отправить содержимое поста, например, на сервер или в стейт-менеджер
+        addPost(postContent)
         console.log(postContent);
     };
 
     return (
         <PostInputWrapper>
-            <Toolbar sx={{
-                backgroundColor: '#fff',
-                borderRadius: '5px',
-                color: 'text.secondary',
-            }}>
+            <Toolbar sx={ToolbarSx}>
                 <TwitterIcon sx={{mr: '15px'}}/>
                 <Typography variant="h6" sx={{flexGrow: 1}}>
                     My posts
@@ -64,7 +67,7 @@ export const PostInput = () => {
                 variant="contained"
                 color="primary"
                 onClick={handleSubmit}
-                style={{marginTop: '1rem'}}
+                sx={{mt: '1rem'}}
             >
                 Publish
             </Button>
