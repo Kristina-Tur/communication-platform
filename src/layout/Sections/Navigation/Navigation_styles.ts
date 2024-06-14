@@ -5,6 +5,10 @@ const Nav = styled.nav`
 flex-shrink: 0; 
 max-width: 200px; 
 width: 100%;
+display: flex;
+
+flex-direction: column;
+align-items: center;
 `
 
 const Ul = styled.ul`
@@ -18,6 +22,7 @@ const Ul = styled.ul`
 const Li = styled.li`
     cursor: pointer;
     text-decoration: none;
+    margin-bottom: 25px;
 `
 const Link = styled(NavLink)`
     color: black;
@@ -29,7 +34,7 @@ const Link = styled(NavLink)`
     }
 `
 
-export const S = {
+export const Sn = {
     Nav,
     Ul,
     Li,

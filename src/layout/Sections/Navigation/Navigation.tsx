@@ -1,26 +1,26 @@
 import React from "react";
-import { S } from "./Navigation_styles";
+import { Sn } from "./Navigation_styles";
 
 export const Navigation = () => {
     return (
-        <S.Nav>
-            <S.Ul>
-                <S.Li>
-                    <S.Link to="/profile">Profile</S.Link>
-                </S.Li>
-                <S.Li>
-                    <S.Link to="/dialogs">Messages</S.Link>
-                </S.Li>
-                <S.Li>
-                    <S.Link to="/news">News</S.Link>
-                </S.Li>
-                <S.Li>
-                    <S.Link to="/music">Music</S.Link>
-                </S.Li>
-                <S.Li>
-                    <S.Link to="/settings">Settings</S.Link>
-                </S.Li>
-            </S.Ul>
-        </S.Nav>
+        <Sn.Nav>
+            <Sn.Ul>
+                <Sn.Li>
+                    <Sn.Link to="/profile">Profile</Sn.Link>
+                </Sn.Li>
+                <Sn.Li>
+                    <Sn.Link to="/dialogs">Messages</Sn.Link>
+                </Sn.Li>
+                <Sn.Li>
+                    <Sn.Link to="/news">News</Sn.Link>
+                </Sn.Li>
+                <Sn.Li>
+                    <Sn.Link to="/music">Music</Sn.Link>
+                </Sn.Li>
+                <Sn.Li>
+                    <Sn.Link to="/settings">Settings</Sn.Link>
+                </Sn.Li>
+            </Sn.Ul>
+        </Sn.Nav>
     );
 };

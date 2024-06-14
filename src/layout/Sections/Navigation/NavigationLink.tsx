@@ -1,4 +1,4 @@
-import { S } from "./Navigation_styles";
+import { Sn } from "./Navigation_styles";
 
 type PropsType = {
     href: string;
@@ -7,6 +7,6 @@ type PropsType = {
 
 export const NavigationLink = ({ href, title }: PropsType) => {
     return (
-        <S.Link to={href}>{title}</S.Link>
+        <Sn.Link to={href}>{title}</Sn.Link>
     )
 }

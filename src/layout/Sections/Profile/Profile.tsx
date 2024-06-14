@@ -14,7 +14,6 @@ type ProfilePropsType = {
 }
 
 export const Profile = ({posts, addPost}: ProfilePropsType) => {
-
     return (
         <Section>
             <FlexWrapper justifyContent={'space-around'}>

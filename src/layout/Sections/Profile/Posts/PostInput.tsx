@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {ChangeEvent, useRef, useState} from 'react';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import TwitterIcon from '@mui/icons-material/Twitter';
@@ -16,18 +16,17 @@ type PostInputPropsType = {
 }
 
 export const PostInput = ({addPost}: PostInputPropsType) => {
-    const [postContent, setPostContent] = useState('');
-    console.log(postContent)
+    const [value, setValue] = useState('')
+    const textareaRef = useRef(null)
 
-    const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-        setPostContent(event.currentTarget.value);
-        console.log(postContent)
-    };
+    const onChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
+        setValue(event.currentTarget.value)
+    }
 
-    const handleSubmit = () => {
-        addPost(postContent)
-        console.log(postContent);
-    };
+    const onClickHandler = () => {
+        addPost(value)
+        setValue('')
+    }
 
     return (
         <PostInputWrapper>
@@ -60,13 +59,14 @@ export const PostInput = ({addPost}: PostInputPropsType) => {
                 placeholder="Enter the text of your post here..."
                 variant="outlined"
                 fullWidth
-                value={postContent}
-                onChange={handleInputChange}
+                value={value}
+                onChange={onChangeHandler}
+                ref={textareaRef}
             />
             <Button
                 variant="contained"
                 color="primary"
-                onClick={handleSubmit}
+                onClick={onClickHandler}
                 sx={{mt: '1rem'}}
             >
                 Publish

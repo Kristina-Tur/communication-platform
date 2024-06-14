@@ -1,5 +1,5 @@
 import { NavigationLink } from "./NavigationLink";
-import { S } from "./Navigation_styles";
+import { Sn } from "./Navigation_styles";
 
 
 
@@ -13,10 +13,10 @@ export const NavigationDone = () => {
     ];
 
     return (
-        <S.Nav>
-            <S.Ul>
+        <Sn.Nav>
+            <Sn.Ul>
                 {navigationInfo.map((data) => <NavigationLink href={data.href} title={data.title} />)}
-            </S.Ul>
-        </S.Nav>
+            </Sn.Ul>
+        </Sn.Nav>
     );
 };
