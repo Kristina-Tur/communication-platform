@@ -5,7 +5,7 @@ import {MessageType} from "./layout/sections/Dialogs/MessageList";
 import {DialogListType} from "./layout/sections/Dialogs/DialogList";
 import {Navigation} from "./layout/sections/Navigation/Navigation";
 import {Profile} from "./layout/sections/Profile/Profile";
-import {Route} from "react-router-dom";
+import {Redirect, Route, Router, Switch} from "react-router-dom";
 import styled from "styled-components";
 import {Dialogs} from "./layout/sections/Dialogs/Dialogs";
 import {useState} from "react";
@@ -33,16 +33,22 @@ function App({initialPosts}: AppPropsType) {
             <Header/>
             <ContentWrapper>
                 <Navigation/>
-                <Route path={'/profile'} render={() => <Profile
-                    posts={posts}
-                    addPost={addPost}
-                />}/>
-                {/*<Route path={'/dialogs'} render={() => <Dialogs
+                <Switch>
+                    <Route exact path="/" render={() => <Redirect to='/profile'/>}/>{/*В этом примере мы используем
+                    компонент Redirect для перенаправления пользователя на страницу /profile при совпадении пути /. Мы
+                    также используем свойство exact, чтобы убедиться, что маршрут / совпадает только с точным путем /.*/}
+                    <Route path={'/profile'} render={() => <Profile
+                        posts={posts}
+                        addPost={addPost}
+                    />}/>
+                    {/*<Route path={'/dialogs'} render={() => <Dialogs
                     dialogs={dialogs}
                     message={message}
                     friendMessage={friendMessage}
                 />}
                 />*/}
+                </Switch>
+
             </ContentWrapper>
         </div>
     );

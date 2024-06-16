@@ -34,7 +34,19 @@ const friendMessage: MessageType = {
     },
 }*/
 
-export const state = {
+
+type postsType = {
+    id: string
+    postText: string
+}
+
+type stateType = {
+    profile: {
+        posts: postsType[]
+    }
+}
+
+export const state: stateType = {
     profile: {
         posts: [
             {id: v1(), postText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'},
