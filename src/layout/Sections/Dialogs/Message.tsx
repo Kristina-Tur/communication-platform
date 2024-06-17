@@ -1,6 +1,6 @@
 import React from 'react'
 import s from './Message.module.css'
-import {MessageType} from './MessageList';
+import {MessageType} from "../../../state/state";
 
 // нужно создать правильный тип вместо any
 export type MessagePropsType = {
@@ -22,12 +22,12 @@ const Message = (props: MessagePropsType) => {
                         {props.message.user.name}
                     </div>
                     <pre id={'hw1-text-' + props.message.id} className={s.messageText}>
-                        {props.message.message.text}
+                        {props.message.messageText.text}
                     </pre>
                 </div>
             </div>
             <div id={'hw1-time-' + props.message.id} className={s.time}>
-                {props.message.message.time}
+                {props.message.messageText.time}
             </div>
         </div>
     )

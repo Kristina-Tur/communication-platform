@@ -1,6 +1,6 @@
 import React from 'react'
 import s from './FriendMessage.module.css'
-import {MessageType} from './MessageList';
+import {MessageType} from "../../../state/state";
 
 type FriendMessagePropsType = {
     message: MessageType
@@ -27,7 +27,7 @@ const FriendMessage = (props: FriendMessagePropsType) => {
                         id={'hw1-friend-text-' + props.message.id}
                         className={s.friendMessageText}
                     >
-                        {props.message.message.text}
+                        {props.message.messageText.text}
                     </pre>
                 </div>
             </div>
@@ -35,7 +35,7 @@ const FriendMessage = (props: FriendMessagePropsType) => {
                 id={'hw1-friend-time-' + props.message.id}
                 className={s.friendTime}
             >
-                {props.message.message.time}
+                {props.message.messageText.time}
             </div>
         </div>
     )

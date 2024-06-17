@@ -3,7 +3,8 @@ import * as React from 'react';
 import {MessageForm} from "./MessageForm";
 import {DialogList, DialogListType} from "./DialogList";
 import styled from "styled-components";
-import {MessageList, MessageType} from "./MessageList";
+import {MessageList} from "./MessageList";
+import {MessageType} from "../../../state/state";
 
 export type DialogsProps = {
     dialogs: DialogListType[]

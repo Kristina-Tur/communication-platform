@@ -1,15 +1,13 @@
 import * as React from 'react';
 import {Header} from "./layout/header/Header";
-import avatar from "./assets/images/avatar.png";
-import {MessageType} from "./layout/sections/Dialogs/MessageList";
-import {DialogListType} from "./layout/sections/Dialogs/DialogList";
-import {Navigation} from "./layout/sections/Navigation/Navigation";
+import {Sidebar} from "./layout/sections/Sidebar/Sidebar";
 import {Profile} from "./layout/sections/Profile/Profile";
 import {Redirect, Route, Router, Switch} from "react-router-dom";
 import styled from "styled-components";
 import {Dialogs} from "./layout/sections/Dialogs/Dialogs";
 import {useState} from "react";
 import {v1} from "uuid";
+import {DialogsType, MenuType, MessageType} from "./state/state";
 
 export type PostsType = {
     id: string
@@ -18,9 +16,15 @@ export type PostsType = {
 
 type AppPropsType = {
     initialPosts: PostsType[]
+    messagesPage: {
+        dialogs: DialogsType[]
+        message: MessageType
+        friendMessage: MessageType
+    }
+    sidebar: MenuType[]
 }
 
-function App({initialPosts}: AppPropsType) {
+function App({initialPosts, messagesPage, sidebar}: AppPropsType) {
     const [posts, setPosts] = useState<PostsType[]>(initialPosts)
 
     const addPost = (value: string) => {
@@ -32,7 +36,7 @@ function App({initialPosts}: AppPropsType) {
         <div>
             <Header/>
             <ContentWrapper>
-                <Navigation/>
+                <Sidebar sidebar={sidebar}/>
                 <Switch>
                     <Route exact path="/" render={() => <Redirect to='/profile'/>}/>{/*В этом примере мы используем
                     компонент Redirect для перенаправления пользователя на страницу /profile при совпадении пути /. Мы
@@ -41,12 +45,12 @@ function App({initialPosts}: AppPropsType) {
                         posts={posts}
                         addPost={addPost}
                     />}/>
-                    {/*<Route path={'/dialogs'} render={() => <Dialogs
-                    dialogs={dialogs}
-                    message={message}
-                    friendMessage={friendMessage}
+                    <Route path={'/messages'} render={() => <Dialogs
+                    dialogs={messagesPage.dialogs}
+                    message={messagesPage.message}
+                    friendMessage={messagesPage.friendMessage}
                 />}
-                />*/}
+                />
                 </Switch>
 
             </ContentWrapper>

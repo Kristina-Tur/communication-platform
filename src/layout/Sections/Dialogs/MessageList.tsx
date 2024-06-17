@@ -3,20 +3,7 @@ import s2 from './App.module.css'
 import avatar from '../../../assets/images/avatar.png'
 import Message from "./Message";
 import FriendMessage from "./FriendMessage";
-
-export type MessageType = {
-    id: number
-    user: UserType
-    message: TextMessageType
-}
-export type UserType = {
-    avatar: string
-    name: string
-}
-export type TextMessageType = {
-    text: string
-    time: string
-}
+import {MessageType} from "../../../state/state";
 
 type Props = {
     message: MessageType
