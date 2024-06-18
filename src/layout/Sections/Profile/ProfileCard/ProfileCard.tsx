@@ -7,12 +7,12 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import PeopleIcon from '@mui/icons-material/People';
 import avatar from '../../../../assets/images/avatar.svg'
 import Box from "@mui/material/Box";
-import {CardMediaSx, CardSx} from "./CardProfile.styles";
+import {CardMediaSx, CardSx} from "./ProfileCard.styles";
 
 type Props = {
 
 };
-export const CardProfile = (props: Props) => {
+export const ProfileCard = (props: Props) => {
     return (
         <Card sx={CardSx}>
             <CardMedia

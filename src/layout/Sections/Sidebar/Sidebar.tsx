@@ -1,5 +1,5 @@
 import React from "react";
-import {S} from "./Navigation_styles";
+import {S} from "./Sidebar.styles";
 import {v1} from "uuid";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';

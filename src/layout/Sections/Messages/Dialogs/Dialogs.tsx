@@ -15,7 +15,7 @@ export type DialogListType = {
     avatar: string
 }
 
-export const DialogList = ({dialogs}: Props) => {
+export const Dialogs = ({dialogs}: Props) => {
     const [selectedDialog, setSelectedDialog] = useState(null);
 
     const handleDialogClick = (dialog: any) => {
@@ -23,7 +23,7 @@ export const DialogList = ({dialogs}: Props) => {
     };
 
     return (
-        <List sx={{maxWidth: 360, marginTop: '50px'}}>
+        <List sx={{maxWidth: '150px', width: '100%', height: 'max-content',borderRight: '1px solid rgb(217, 217, 217)'}}>
             {dialogs.map((dialog) => (
                 <ListItem
                     key={dialog.id}

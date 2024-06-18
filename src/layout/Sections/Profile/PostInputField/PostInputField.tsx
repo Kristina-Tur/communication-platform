@@ -9,13 +9,14 @@ import Button from '@mui/material/Button';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Badge from '@mui/material/Badge';
-import {ToolbarSx} from "./PostInput.styles";
+import {ToolbarSx} from "./PostInputField.styles";
+import {Theme} from "../../../../styles/Theme";
 
 type PostInputPropsType = {
     addPost: (value: string) => void
 }
 
-export const PostInput = ({addPost}: PostInputPropsType) => {
+export const PostInputField = ({addPost}: PostInputPropsType) => {
     const [value, setValue] = useState('')
     const textareaRef = useRef(null)
 
@@ -78,4 +79,8 @@ export const PostInput = ({addPost}: PostInputPropsType) => {
 const PostInputWrapper = styled.div`
     max-width: 750px;
     width: 100%;
+
+    @media ${Theme.media.desktop}{
+        max-width: inherit;
+    }
 `

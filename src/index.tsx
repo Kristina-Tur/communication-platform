@@ -12,9 +12,9 @@ ReactDOM.render(
     <ThemeProvider theme={Theme}>
         <BrowserRouter>
             <App
+                sidebar={state.sidebar.menu}
                 initialPosts={state.profilePage.posts}
                 messagesPage={state.messagesPage}
-                sidebar={state.sidebar.menu}
             />
             <GlobalStyles/>
         </BrowserRouter>

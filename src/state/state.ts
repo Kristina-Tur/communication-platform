@@ -63,8 +63,7 @@ export const state: stateType = {
             {id: v1(), postText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'},
             {id: v1(), postText: ' Lorem ipsum dolor sit amet'},
         ]
-    }
-    ,
+    },
     messagesPage: {
         dialogs: [
             {id: 1, name: 'Max', avatar: 'https://via.placeholder.com/150/92c952'},
@@ -74,23 +73,17 @@ export const state: stateType = {
             {id: 5, name: 'Mike', avatar: 'https://via.placeholder.com/150/24f355'},
             {id: 6, name: 'Alex', avatar: 'https://via.placeholder.com/150/92c952'},
         ],
-        message:
-            {
-                id: 0,
-                user:
-                    {
-                        avatar: avatar, // можно менять
-                        name:
-                            'Some Name',  // можно менять
-                    }
-                ,
-                messageText: {
-                    text: 'some textsome textsome textsome textsome textsome textsome text', // можно менять
-                    time:
-                        '22:00', // можно менять
-                }
-                ,
-            }
+        message: {
+            id: 0,
+            user: {
+                avatar: avatar,
+                name: 'Some Name',
+            },
+            messageText: {
+                text: 'some textsome textsome textsome textsome textsome textsome text',
+                time: '22:00'
+            },
+        }
         ,
         friendMessage: {
             id: 100,
@@ -102,7 +95,7 @@ export const state: stateType = {
                 }
             ,
             messageText: {
-                text: 'зеркальное сообщение для тренировки css', // можно менять
+                text: 'зеркальное сообщение', // можно менять
                 time:
                     '22:00', // можно менять
             }

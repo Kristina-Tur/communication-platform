@@ -1,12 +1,11 @@
-import bg from "../../../assets/images/bg.png";
 import styled from "styled-components";
-import {FlexWrapper} from "../../../components/FlexWrapper";
-import {CardProfile} from "./CardProfile/CardProfile";
-import {PostInput} from "./Posts/PostInput";
+import {ProfileCard} from "./ProfileCard/ProfileCard";
 import {Post} from "./Posts/Post/Post";
-import {useState} from "react";
-import {v1} from "uuid";
 import {PostsType} from "../../../App";
+import {PostInputField} from "./PostInputField/PostInputField";
+import {Container} from "../../../components/Container";
+import {Theme} from "../../../styles/Theme";
+import {Section} from "../../../components/Section";
 
 type ProfilePropsType = {
     posts: PostsType[]
@@ -16,27 +15,33 @@ type ProfilePropsType = {
 export const Profile = ({posts, addPost}: ProfilePropsType) => {
     return (
         <Section>
-            <FlexWrapper justifyContent={'space-around'}>
-                <CardProfile/>
-                <PostInput
+            <Container>
+            <BoxWrapper>
+                <ProfileCard/>
+                <PostInputField
                     addPost={addPost}
                 />
-            </FlexWrapper>
+            </BoxWrapper>
             <PostsWrapper>
                 {posts.map(post => <Post key={post.id} postText={post.postText}/>)}
             </PostsWrapper>
+            </Container>
         </Section>
     );
 };
 
-const Section = styled.section`
-    background-image: url(${bg});
-    background-size: auto 200px;
-    background-repeat: no-repeat;
-    background-color: #c8e0ff33;
 
-    padding-top: 135px;
-    flex-grow: 1;
+
+const BoxWrapper = styled.div`
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+
+    @media ${Theme.media.desktop}{
+        flex-direction: column;
+        align-items: center;
+        gap: 50px;
+    }
 `
 
 const PostsWrapper = styled.div`
