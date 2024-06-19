@@ -6,20 +6,25 @@ import {PostInputField} from "./PostInputField/PostInputField";
 import {Container} from "../../../components/Container";
 import {Theme} from "../../../styles/Theme";
 import {Section} from "../../../components/Section";
+import {updatePostText} from "../../../state/state";
 
 type ProfilePropsType = {
     posts: PostsType[]
-    addPost: (value: string) => void
+    postText: string
+    addPost: () => void
+    updatePostText: (value: string) => void
 }
 
-export const Profile = ({posts, addPost}: ProfilePropsType) => {
+export const Profile = ({posts, postText, addPost, updatePostText}: ProfilePropsType) => {
     return (
         <Section>
             <Container>
             <BoxWrapper>
                 <ProfileCard/>
                 <PostInputField
+                    postText={postText}
                     addPost={addPost}
+                    updatePostText={updatePostText}
                 />
             </BoxWrapper>
             <PostsWrapper>

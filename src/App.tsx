@@ -7,7 +7,7 @@ import styled from "styled-components";
 import {Messages} from "./layout/sections/Messages/Messages";
 import {useState} from "react";
 import {v1} from "uuid";
-import {DialogsType, MenuType, MessageType} from "./state/state";
+import {addPost, DialogsType, MenuType, MessageType, StateType, updatePostText} from "./state/state";
 
 export type PostsType = {
     id: string
@@ -15,40 +15,32 @@ export type PostsType = {
 }
 
 type AppPropsType = {
-    sidebar: MenuType[]
-    initialPosts: PostsType[]
-    messagesPage: {
-        dialogs: DialogsType[]
-        message: MessageType
-        friendMessage: MessageType
-    }
+    state: StateType
+    addPost: () => void
+    updatePostText: (value: string) => void
 }
 
-function App({initialPosts, messagesPage, sidebar}: AppPropsType) {
-    const [posts, setPosts] = useState<PostsType[]>(initialPosts)
-
-    const addPost = (value: string) => {
-        const newPost = {id: v1(), postText: value}
-        setPosts([newPost, ...posts])
-    }
+function App({state, addPost, updatePostText}: AppPropsType) {
 
     return (
         <div>
             <Header/>
             <ContentWrapper>
-                <Sidebar sidebar={sidebar}/>
+                <Sidebar sidebar={state.sidebar.menu}/>
                 <Switch>
                     <Route exact path="/samurai-way-main" render={() => <Redirect to='/profile'/>}/>{/*В этом примере мы используем
                     компонент Redirect для перенаправления пользователя на страницу /profile при совпадении пути /. Мы
                     также используем свойство exact, чтобы убедиться, что маршрут / совпадает только с точным путем /.*/}
                     <Route path={'/profile'} render={() => <Profile
-                        posts={posts}
+                        posts={state.profilePage.posts}
+                        postText={state.profilePage.postText}
                         addPost={addPost}
+                        updatePostText={updatePostText}
                     />}/>
                     <Route path={'/messages'} render={() => <Messages
-                    dialogs={messagesPage.dialogs}
-                    message={messagesPage.message}
-                    friendMessage={messagesPage.friendMessage}
+                    dialogs={state.messagesPage.dialogs}
+                    message={state.messagesPage.message}
+                    friendMessage={state.messagesPage.friendMessage}
                 />}
                 />
                 </Switch>

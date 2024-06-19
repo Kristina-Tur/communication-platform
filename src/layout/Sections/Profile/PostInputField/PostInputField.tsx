@@ -11,22 +11,26 @@ import IconButton from '@mui/material/IconButton';
 import Badge from '@mui/material/Badge';
 import {ToolbarSx} from "./PostInputField.styles";
 import {Theme} from "../../../../styles/Theme";
+import {updatePostText} from "../../../../state/state";
 
 type PostInputPropsType = {
-    addPost: (value: string) => void
+    postText: string
+    addPost: () => void
+    updatePostText: (value: string) => void
 }
 
-export const PostInputField = ({addPost}: PostInputPropsType) => {
-    const [value, setValue] = useState('')
-    const textareaRef = useRef(null)
+export const PostInputField = ({postText, addPost, updatePostText}: PostInputPropsType) => {
+    const textareaRef = useRef<HTMLInputElement>(null)
 
-    const onChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
-        setValue(event.currentTarget.value)
+    const onChangeHandler = () => {
+        if (textareaRef.current) {
+            updatePostText(textareaRef.current.value)
+            console.log(textareaRef.current.value)
+        }
     }
 
     const onClickHandler = () => {
-        addPost(value)
-        setValue('')
+            addPost()
     }
 
     return (
@@ -60,9 +64,9 @@ export const PostInputField = ({addPost}: PostInputPropsType) => {
                 placeholder="Enter the text of your post here..."
                 variant="outlined"
                 fullWidth
-                value={value}
+                value={postText}
                 onChange={onChangeHandler}
-                ref={textareaRef}
+                inputRef={textareaRef}
             />
             <Button
                 variant="contained"
@@ -80,7 +84,7 @@ const PostInputWrapper = styled.div`
     max-width: 750px;
     width: 100%;
 
-    @media ${Theme.media.desktop}{
+    @media ${Theme.media.desktop} {
         max-width: inherit;
     }
 `

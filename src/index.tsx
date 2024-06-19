@@ -6,18 +6,23 @@ import {ThemeProvider} from "styled-components";
 import {Theme} from "./styles/Theme";
 import {GlobalStyles} from "./styles/GlobalStyles";
 import {BrowserRouter} from "react-router-dom";
-import {state} from './state/state'
+import {addPost, state, StateType, subscribe, updatePostText} from './state/state'
 
-ReactDOM.render(
-    <ThemeProvider theme={Theme}>
-        <BrowserRouter>
-            <App
-                sidebar={state.sidebar.menu}
-                initialPosts={state.profilePage.posts}
-                messagesPage={state.messagesPage}
-            />
-            <GlobalStyles/>
-        </BrowserRouter>
-    </ThemeProvider>,
-    document.getElementById('root')
-);
+const rerenderEntireTree = (state: StateType) => {
+    ReactDOM.render(
+        <ThemeProvider theme={Theme}>
+            <BrowserRouter>
+                <App
+                    state={state}
+                    addPost={addPost}
+                    updatePostText={updatePostText}
+                />
+                <GlobalStyles/>
+            </BrowserRouter>
+        </ThemeProvider>,
+        document.getElementById('root')
+    );
+}
+
+rerenderEntireTree(state)
+subscribe(rerenderEntireTree)

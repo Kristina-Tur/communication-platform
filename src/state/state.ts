@@ -34,12 +34,13 @@ export type MessageType = {
     messageText: MessageTextType
 }
 
-type stateType = {
+export type StateType = {
     sidebar: {
         menu: MenuType[]
     }
     profilePage: {
         posts: PostsType[]
+        postText: string
     },
     messagesPage: {
         dialogs: DialogsType[]
@@ -48,7 +49,7 @@ type stateType = {
     }
 }
 
-export const state: stateType = {
+export const state: StateType = {
     sidebar: {
         menu: [
             {id: v1(), href: '/profile', title: 'Profile'},
@@ -62,7 +63,8 @@ export const state: stateType = {
         posts: [
             {id: v1(), postText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'},
             {id: v1(), postText: ' Lorem ipsum dolor sit amet'},
-        ]
+        ],
+        postText: ''
     },
     messagesPage: {
         dialogs: [
@@ -83,8 +85,7 @@ export const state: stateType = {
                 text: 'some textsome textsome textsome textsome textsome textsome text',
                 time: '22:00'
             },
-        }
-        ,
+        },
         friendMessage: {
             id: 100,
             user:
@@ -102,4 +103,24 @@ export const state: stateType = {
             ,
         }
     }
+}
+
+let rerenderEntireTree = (state: StateType) => {
+    console.log('rerender')
+}
+
+export const addPost = () => {
+    const newPost = {id: v1(), postText: state.profilePage.postText}
+    state.profilePage.posts.unshift(newPost)
+    state.profilePage.postText = ''
+    rerenderEntireTree(state)
+}
+
+export const updatePostText = (value: string) => {
+    state.profilePage.postText = value
+    rerenderEntireTree(state)
+}
+
+export const subscribe = (observer: (state: StateType) => void) => {
+    rerenderEntireTree = observer
 }

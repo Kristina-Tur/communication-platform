@@ -1,4 +1,3 @@
-// @flow
 import * as React from 'react';
 import {MessageForm} from "./MessageForm/MessageForm";
 import {Dialogs, DialogListType} from "./Dialogs/Dialogs";
@@ -6,7 +5,6 @@ import styled from "styled-components";
 import {MessageList} from "./MessageList/MessageList";
 import {MessageType} from "../../../state/state";
 import {Container} from "../../../components/Container";
-import {Section} from "../../../components/Section";
 
 export type MessagesProps = {
     dialogs: DialogListType[]
