@@ -7,7 +7,7 @@ import styled from "styled-components";
 import {Messages} from "./layout/sections/Messages/Messages";
 import {useState} from "react";
 import {v1} from "uuid";
-import {addPost, DialogsType, MenuType, MessageType, StateType, updatePostText} from "./state/state";
+import {StateType, StoreType} from "./state/state";
 
 export type PostsType = {
     id: string
@@ -37,12 +37,12 @@ function App({state, addPost, updatePostText}: AppPropsType) {
                         addPost={addPost}
                         updatePostText={updatePostText}
                     />}/>
-                    <Route path={'/messages'} render={() => <Messages
+                   {/* <Route path={'/messages'} render={() => <Messages
                     dialogs={state.messagesPage.dialogs}
                     message={state.messagesPage.message}
                     friendMessage={state.messagesPage.friendMessage}
                 />}
-                />
+                />*/}
                 </Switch>
 
             </ContentWrapper>

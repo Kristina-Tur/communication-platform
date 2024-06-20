@@ -6,16 +6,16 @@ import {ThemeProvider} from "styled-components";
 import {Theme} from "./styles/Theme";
 import {GlobalStyles} from "./styles/GlobalStyles";
 import {BrowserRouter} from "react-router-dom";
-import {addPost, state, StateType, subscribe, updatePostText} from './state/state'
+import {StateType, store} from './state/state'
 
-const rerenderEntireTree = (state: StateType) => {
+let rerenderEntireTree = () => {
     ReactDOM.render(
         <ThemeProvider theme={Theme}>
             <BrowserRouter>
                 <App
-                    state={state}
-                    addPost={addPost}
-                    updatePostText={updatePostText}
+                    state={store.getState()}
+                    addPost = {store.addPost.bind(store)}
+                    updatePostText = {store.updatePostText.bind(store)}
                 />
                 <GlobalStyles/>
             </BrowserRouter>
@@ -24,5 +24,9 @@ const rerenderEntireTree = (state: StateType) => {
     );
 }
 
+/*
 rerenderEntireTree(state)
-subscribe(rerenderEntireTree)
+subscribe(rerenderEntireTree)*/
+
+store.subscribe(rerenderEntireTree)
+rerenderEntireTree()
