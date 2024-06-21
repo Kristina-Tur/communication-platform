@@ -6,7 +6,7 @@ import {PostInputField} from "./PostInputField/PostInputField";
 import {Container} from "../../../components/Container";
 import {Theme} from "../../../styles/Theme";
 import {Section} from "../../../components/Section";
-import {updatePostText} from "../../../state/state";
+import {} from "../../../state/state";
 
 type ProfilePropsType = {
     posts: PostsType[]

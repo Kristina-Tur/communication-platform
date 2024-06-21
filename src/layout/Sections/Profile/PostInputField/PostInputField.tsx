@@ -11,7 +11,6 @@ import IconButton from '@mui/material/IconButton';
 import Badge from '@mui/material/Badge';
 import {ToolbarSx} from "./PostInputField.styles";
 import {Theme} from "../../../../styles/Theme";
-import {updatePostText} from "../../../../state/state";
 
 type PostInputPropsType = {
     postText: string
