@@ -50,6 +50,12 @@ export type StateType = {
     }
 }
 
+type AddPostActionType = ReturnType<typeof addPostAC>
+type UpdatePostTextActionType = ReturnType<typeof updatePostTextAC>
+export type ActionType =
+    AddPostActionType |
+    UpdatePostTextActionType
+
 export type StoreType = {
     _state: {
         sidebar: {
@@ -65,12 +71,10 @@ export type StoreType = {
             friendMessage: MessageType
         }
     }
-    getState: () => StateType
     _callSubscriber: () => void
+    getState: () => StateType
     subscribe: (observer: () => void) => void
-    addPost: () => void
-    updatePostText: (value: string) => void
-
+    dispatch: (action: ActionType) => void
 }
 
 export let store: StoreType = {
@@ -125,23 +129,37 @@ export let store: StoreType = {
             }
         }
     },
-    getState() {
-        return this._state
-    },
     _callSubscriber() {
     },
-
-    addPost(){
-        const newPost = {id: v1(), postText: this._state.profilePage.postText}
-        this._state.profilePage.posts.unshift(newPost)
-        this._state.profilePage.postText = ''
-        this._callSubscriber()
-    },
-    updatePostText(value: string) {
-        this._state.profilePage.postText = value
-        this._callSubscriber()
+    getState() {
+        return this._state
     },
     subscribe(observer: () => void) {
         this._callSubscriber = observer
     },
+    dispatch(action: ActionType) {
+        switch (action.type) {
+            case 'ADD-POST': {
+                const newPost = {id: v1(), postText: this._state.profilePage.postText}
+                this._state.profilePage.posts.unshift(newPost)
+                this._state.profilePage.postText = ''
+                this._callSubscriber()
+                return this._state
+            }
+            case 'UPDATE-POST-TEXT': {
+                this._state.profilePage.postText = action.value
+                this._callSubscriber()
+                return this._state
+            }
+            default :
+                return this._state
+        }
+    }
+}
+
+export const addPostAC = () => {
+    return {type: 'ADD-POST'} as const
+}
+export const updatePostTextAC = (value: string) => {
+    return {type: 'UPDATE-POST-TEXT', value} as const
 }

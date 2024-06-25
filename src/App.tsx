@@ -7,7 +7,7 @@ import styled from "styled-components";
 import {Messages} from "./layout/sections/Messages/Messages";
 import {useState} from "react";
 import {v1} from "uuid";
-import {StateType, StoreType} from "./state/state";
+import {ActionType, StateType, StoreType} from "./state/state";
 
 export type PostsType = {
     id: string
@@ -16,11 +16,10 @@ export type PostsType = {
 
 type AppPropsType = {
     state: StateType
-    addPost: () => void
-    updatePostText: (value: string) => void
+    dispatch: (action: ActionType) => void
 }
 
-function App({state, addPost, updatePostText}: AppPropsType) {
+function App({state, dispatch}: AppPropsType) {
 
     return (
         <div>
@@ -31,11 +30,11 @@ function App({state, addPost, updatePostText}: AppPropsType) {
                     <Route exact path="/samurai-way-main" render={() => <Redirect to='/profile'/>}/>{/*В этом примере мы используем
                     компонент Redirect для перенаправления пользователя на страницу /profile при совпадении пути /. Мы
                     также используем свойство exact, чтобы убедиться, что маршрут / совпадает только с точным путем /.*/}
-                    <Route path={'/profile'} render={() => <Profile
+                    <Route path={'/profile'} render={() =>
+                        <Profile
                         posts={state.profilePage.posts}
                         postText={state.profilePage.postText}
-                        addPost={addPost}
-                        updatePostText={updatePostText}
+                        dispatch={dispatch}
                     />}/>
                    {/* <Route path={'/messages'} render={() => <Messages
                     dialogs={state.messagesPage.dialogs}
