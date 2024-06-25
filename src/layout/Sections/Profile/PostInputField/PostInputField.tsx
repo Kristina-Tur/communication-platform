@@ -11,25 +11,25 @@ import IconButton from '@mui/material/IconButton';
 import Badge from '@mui/material/Badge';
 import {ToolbarSx} from "./PostInputField.styles";
 import {Theme} from "../../../../styles/Theme";
+import {ActionType, addPostAC, updatePostTextAC} from "../../../../state/state";
 
 type PostInputPropsType = {
     postText: string
-    addPost: () => void
-    updatePostText: (value: string) => void
+    dispatch: (action: ActionType) => void
 }
 
-export const PostInputField = ({postText, addPost, updatePostText}: PostInputPropsType) => {
+export const PostInputField = ({postText, dispatch}: PostInputPropsType) => {
     const textareaRef = useRef<HTMLInputElement>(null)
 
     const onChangeHandler = () => {
         if (textareaRef.current) {
-            updatePostText(textareaRef.current.value)
+            dispatch(updatePostTextAC(textareaRef.current.value))
             console.log(textareaRef.current.value)
         }
     }
 
     const onClickHandler = () => {
-            addPost()
+            dispatch(addPostAC())
     }
 
     return (
