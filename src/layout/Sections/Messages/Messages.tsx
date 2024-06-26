@@ -3,24 +3,26 @@ import {MessageForm} from "./MessageForm/MessageForm";
 import {Dialogs, DialogListType} from "./Dialogs/Dialogs";
 import styled from "styled-components";
 import {MessageList} from "./MessageList/MessageList";
-import {MessageType} from "../../../state/state";
+import {ActionType, MessageType} from "../../../redux/store";
 import {Container} from "../../../components/Container";
 
 export type MessagesProps = {
     dialogs: DialogListType[]
-    message: MessageType
-    friendMessage: MessageType
+    messages: MessageType[]
+    /*friendMessage: MessageType*/
+    messageText: string
+    dispatch: (action: ActionType) => void
 };
 
-export const Messages = ({dialogs, message, friendMessage}: MessagesProps) => {
+export const Messages = ({dialogs, messages, messageText, dispatch}: MessagesProps) => {
     return (
         <StyledSection>
             <Container>
                 <Wrapper>
                     <Dialogs dialogs={dialogs}/>
-                    <MessageList dialogs={dialogs} message={message} friendMessage={friendMessage}/>
+                    <MessageList dialogs={dialogs} messages={messages} /*friendMessage={friendMessage}*//>
                 </Wrapper>
-                <MessageForm/>
+                <MessageForm messageText={messageText} dispatch={dispatch}/>
             </Container>
         </StyledSection>
     );

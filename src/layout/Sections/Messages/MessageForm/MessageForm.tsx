@@ -1,15 +1,30 @@
-import React, { useState } from 'react';
+import React, {ChangeEvent, FormEvent, useRef, useState} from 'react';
 import { TextField, Button, Grid } from '@mui/material';
+import {ActionType} from "../../../../redux/store";
+import {sendMessageAC, updateMessageTextAC} from "../../../../redux/messages-reducer";
 
-export const MessageForm = (/*{ onSendMessage: string }*/) => {
-    const [message, setMessage] = useState('');
+type MessageFormType = {
+    messageText: string
+    dispatch: (action: ActionType) => void
+}
 
-    const handleSubmit = (e: any) => {
-        e.preventDefault();
-        if (!message.trim()) return; // Предотвратить отправку пустых сообщений
-        /*onSendMessage(message);*/
-        setMessage(''); // Очистить поле ввода после отправки
-    };
+export const MessageForm = ({messageText, dispatch}: MessageFormType) => {
+
+    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        if (e.currentTarget) {
+            dispatch(updateMessageTextAC(e.currentTarget.value))
+        }
+    }
+
+    const onClickHandler = () => {
+        dispatch(sendMessageAC())
+    }
+
+    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        // очищаем форму после отправки
+        e.currentTarget.reset();
+    }
 
     return (
         <form onSubmit={handleSubmit}>
@@ -19,12 +34,12 @@ export const MessageForm = (/*{ onSendMessage: string }*/) => {
                         fullWidth
                         variant="outlined"
                         placeholder="Введите сообщение..."
-                        value={message}
-                        onChange={(e) => setMessage(e.target.value)}
+                        value={messageText}
+                        onChange={onChangeHandler}
                     />
                 </Grid>
                 <Grid item xs={2}>
-                    <Button fullWidth variant="contained" color="primary" type="submit">
+                    <Button fullWidth variant="contained" color="primary" type="submit" onClick={onClickHandler}>
                         Отправить
                     </Button>
                 </Grid>

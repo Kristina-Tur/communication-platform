@@ -1,33 +1,37 @@
 import React from 'react'
-import {MessageType} from "../../../../../state/state";
+import {MessageType} from "../../../../../redux/store";
 import styled from "styled-components";
 import {Theme} from "../../../../../styles/Theme";
 
 type FriendMessagePropsType = {
-    message: MessageType
+    messages: MessageType[]
 }
 
-export const FriendMessage = ({message}: FriendMessagePropsType) => {
+export const FriendMessage = ({messages}: FriendMessagePropsType) => {
     return (
-        <MessageWrapper>
-            <ImgWrapper>
-                <img
-                    src={message.user.avatar}
-                    alt={'avatar'}
-                />
-                <TextWrapper>
-                    <NameWrapper>
-                        {message.user.name}
-                    </NameWrapper>
-                    <MessageText>
-                        {message.messageText.text}
-                    </MessageText>
-                </TextWrapper>
-            </ImgWrapper>
-            <TimeWrapper>
-                {message.messageText.time}
-            </TimeWrapper>
-        </MessageWrapper>
+        <>
+            {messages.map(message => {
+                return  <MessageWrapper key={message.id}>
+                    <ImgWrapper>
+                        <img
+                            src={message.user.avatar}
+                            alt={'avatar'}
+                        />
+                        <TextWrapper>
+                            <NameWrapper>
+                                {message.user.name}
+                            </NameWrapper>
+                            <MessageText>
+                                {message.messageText.text}
+                            </MessageText>
+                        </TextWrapper>
+                    </ImgWrapper>
+                    <TimeWrapper>
+                        {message.messageText.time}
+                    </TimeWrapper>
+                </MessageWrapper>
+            })}
+        </>
     )
 }
 

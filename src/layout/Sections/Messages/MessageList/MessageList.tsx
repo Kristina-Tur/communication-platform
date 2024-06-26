@@ -3,7 +3,7 @@ import s2 from '../App.module.css'
 import avatar from '../../../../assets/images/avatar.png'
 import {Message} from "./Message/Message";
 import {FriendMessage} from "./FriendMessage/FriendMessage";
-import {MessageType} from "../../../../state/state";
+import {MessageType} from "../../../../redux/store";
 import styled from "styled-components";
 import {Avatar, ListItemAvatar} from "@mui/material";
 import ListItemText from "@mui/material/ListItemText";
@@ -11,11 +11,11 @@ import {DialogListType} from "../Dialogs/Dialogs";
 
 type Props = {
     dialogs: DialogListType[]
-    message: MessageType
-    friendMessage: MessageType
+    messages: MessageType[]
+   /* friendMessage: MessageType*/
 }
 
-export const MessageList = ({dialogs, message, friendMessage}: Props) => {
+export const MessageList = ({dialogs, messages}: Props) => {
     return (
         <MessageListWrapper>
             <ListItemWrapper>
@@ -25,8 +25,8 @@ export const MessageList = ({dialogs, message, friendMessage}: Props) => {
                 <ListItemText primary={dialogs[0].name}/>
             </ListItemWrapper>
             <MessageWrapper>
-                <Message message={message}/>
-                <FriendMessage message={friendMessage}/>
+                <Message messages={messages}/>
+               {/* <FriendMessage messages={messages}/>*/}
             </MessageWrapper>
         </MessageListWrapper>
     )

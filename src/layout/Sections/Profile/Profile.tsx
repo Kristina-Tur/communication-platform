@@ -6,7 +6,7 @@ import {PostInputField} from "./PostInputField/PostInputField";
 import {Container} from "../../../components/Container";
 import {Theme} from "../../../styles/Theme";
 import {Section} from "../../../components/Section";
-import {ActionType} from "../../../state/state";
+import {ActionType} from "../../../redux/store";
 
 type ProfilePropsType = {
     posts: PostsType[]

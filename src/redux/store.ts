@@ -1,6 +1,11 @@
 import avatar from "../assets/images/avatar.png";
 import {v1} from "uuid";
-import {observe} from "web-vitals/dist/modules/lib/observe";
+import {
+    addPostAC,
+    profileReducer,
+    updatePostTextAC,
+} from "./profile-reducer";
+import {messagesReducer, sendMessageAC, updateMessageTextAC} from "./messages-reducer";
 
 export type MenuType = {
     id: string
@@ -35,6 +40,20 @@ export type MessageType = {
     messageText: MessageTextType
 }
 
+type MessagesType = {
+    [key: string]: MessageType
+}
+
+export type ProfilePageType = {
+    posts: PostsType[]
+    postText: string
+}
+export type MessagesPageType = {
+    dialogs: DialogsType[]
+    messages: MessageType[]
+    messageText: string
+}
+
 export type StateType = {
     sidebar: {
         menu: MenuType[]
@@ -45,16 +64,19 @@ export type StateType = {
     },
     messagesPage: {
         dialogs: DialogsType[]
-        message: MessageType
-        friendMessage: MessageType
+        messages: MessageType[]
+        messageText: string
     }
 }
-
 type AddPostActionType = ReturnType<typeof addPostAC>
 type UpdatePostTextActionType = ReturnType<typeof updatePostTextAC>
+type SendMessageActionType = ReturnType<typeof sendMessageAC>
+type UpdateMessageTextActionType = ReturnType<typeof updateMessageTextAC>
 export type ActionType =
     AddPostActionType |
-    UpdatePostTextActionType
+    UpdatePostTextActionType |
+    SendMessageActionType |
+    UpdateMessageTextActionType
 
 export type StoreType = {
     _state: {
@@ -67,8 +89,8 @@ export type StoreType = {
         },
         messagesPage: {
             dialogs: DialogsType[]
-            message: MessageType
-            friendMessage: MessageType
+            messages: MessageType[]
+            messageText: string
         }
     }
     _callSubscriber: () => void
@@ -104,29 +126,34 @@ export let store: StoreType = {
                 {id: 5, name: 'Mike', avatar: 'https://via.placeholder.com/150/24f355'},
                 {id: 6, name: 'Alex', avatar: 'https://via.placeholder.com/150/92c952'},
             ],
-            message: {
-                id: 0,
-                user: {
-                    avatar: avatar,
-                    name: 'Some Name',
-                },
-                messageText: {
-                    text: 'some textsome textsome textsome textsome textsome textsome text',
-                    time: '22:00'
+            messages: [
+                /*message: */{
+                    id: 0,
+                    user: {
+                        avatar: avatar,
+                        name: 'Some Name',
+                    },
+                    messageText: {
+                        text: 'some textsome textsome textsome textsome textsome textsome text',
+                        time: '22:00'
+                    }
+                    }
+                ],
+                /*friendMessage: {
+                    id: 100,
+                    user:
+                        {
+                            avatar: avatar,
+                            name: 'Friend Name',
+                        },
+                    messageText: {
+                        text: 'зеркальное сообщение',
+                        time: '22:00',
+                    },
                 },
             },
-            friendMessage: {
-                id: 100,
-                user:
-                    {
-                        avatar: avatar,
-                        name: 'Friend Name',
-                    },
-                messageText: {
-                    text: 'зеркальное сообщение',
-                    time: '22:00',
-                },
-            }
+*/
+            messageText: ''
         }
     },
     _callSubscriber() {
@@ -138,28 +165,12 @@ export let store: StoreType = {
         this._callSubscriber = observer
     },
     dispatch(action: ActionType) {
-        switch (action.type) {
-            case 'ADD-POST': {
-                const newPost = {id: v1(), postText: this._state.profilePage.postText}
-                this._state.profilePage.posts.unshift(newPost)
-                this._state.profilePage.postText = ''
-                this._callSubscriber()
-                return this._state
-            }
-            case 'UPDATE-POST-TEXT': {
-                this._state.profilePage.postText = action.value
-                this._callSubscriber()
-                return this._state
-            }
-            default :
-                return this._state
-        }
+        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        this._state.messagesPage = messagesReducer(this._state.messagesPage, action)
+        this._callSubscriber()
     }
 }
 
-export const addPostAC = () => {
-    return {type: 'ADD-POST'} as const
-}
-export const updatePostTextAC = (value: string) => {
-    return {type: 'UPDATE-POST-TEXT', value} as const
-}
+
+
+

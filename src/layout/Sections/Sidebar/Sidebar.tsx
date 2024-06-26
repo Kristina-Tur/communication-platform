@@ -7,7 +7,7 @@ import NewspaperIcon from '@mui/icons-material/Newspaper';
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
 import SettingsIcon from '@mui/icons-material/Settings';
 import {ListItemIcon} from "@mui/material";
-import {MenuType} from "../../../state/state";
+import {MenuType} from "../../../redux/store";
 
 type SidebarPropsType = {
     sidebar: MenuType[]

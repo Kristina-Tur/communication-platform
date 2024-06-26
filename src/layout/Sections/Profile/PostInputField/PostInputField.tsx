@@ -11,7 +11,8 @@ import IconButton from '@mui/material/IconButton';
 import Badge from '@mui/material/Badge';
 import {ToolbarSx} from "./PostInputField.styles";
 import {Theme} from "../../../../styles/Theme";
-import {ActionType, addPostAC, updatePostTextAC} from "../../../../state/state";
+import {ActionType} from "../../../../redux/store";
+import {addPostAC, updatePostTextAC} from "../../../../redux/profile-reducer";
 
 type PostInputPropsType = {
     postText: string

@@ -1,35 +1,40 @@
 import React from 'react'
-import {MessageType} from "../../../../../state/state";
+import {MessageType} from "../../../../../redux/store";
 import styled from "styled-components";
 import {Theme} from "../../../../../styles/Theme";
 
 // нужно создать правильный тип вместо any
 export type MessagePropsType = {
-    message: MessageType
+    messages: MessageType[]
 }
 
 // нужно отобразить приходящие данные
-export const Message = ({message}: MessagePropsType) => {
+export const Message = ({messages}: MessagePropsType) => {
     return (
-        <MessageWrapper>
-            <ImgWrapper>
-                <img
-                    src={message.user.avatar}
-                    alt={'avatar'}
-                />
-                <TextWrapper>
-                    <NameWrapper>
-                        {message.user.name}
-                    </NameWrapper>
-                    <MessageText>
-                        {message.messageText.text}
-                    </MessageText>
-                </TextWrapper>
-            </ImgWrapper>
-            <TimeWrapper>
-                {message.messageText.time}
-            </TimeWrapper>
-        </MessageWrapper>
+        <>
+        {messages.map(message => {
+            return  (
+                <MessageWrapper key={message.id}>
+                <ImgWrapper>
+                    <img
+                        src={message.user.avatar}
+                        alt={'avatar'}
+                    />
+                    <TextWrapper>
+                        <NameWrapper>
+                            {message.user.name}
+                        </NameWrapper>
+                        <MessageText>
+                            {message.messageText.text}
+                        </MessageText>
+                    </TextWrapper>
+                </ImgWrapper>
+                <TimeWrapper>
+                    {message.messageText.time}
+                </TimeWrapper>
+            </MessageWrapper>
+            )})}
+        </>
     )
 }
 

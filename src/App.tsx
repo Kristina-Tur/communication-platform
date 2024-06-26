@@ -7,7 +7,7 @@ import styled from "styled-components";
 import {Messages} from "./layout/sections/Messages/Messages";
 import {useState} from "react";
 import {v1} from "uuid";
-import {ActionType, StateType, StoreType} from "./state/state";
+import {ActionType, StateType, StoreType} from "./redux/store";
 
 export type PostsType = {
     id: string
@@ -32,16 +32,19 @@ function App({state, dispatch}: AppPropsType) {
                     также используем свойство exact, чтобы убедиться, что маршрут / совпадает только с точным путем /.*/}
                     <Route path={'/profile'} render={() =>
                         <Profile
-                        posts={state.profilePage.posts}
-                        postText={state.profilePage.postText}
-                        dispatch={dispatch}
-                    />}/>
-                   {/* <Route path={'/messages'} render={() => <Messages
-                    dialogs={state.messagesPage.dialogs}
-                    message={state.messagesPage.message}
-                    friendMessage={state.messagesPage.friendMessage}
-                />}
-                />*/}
+                            posts={state.profilePage.posts}
+                            postText={state.profilePage.postText}
+                            dispatch={dispatch}
+                        />}/>
+                    <Route path={'/messages'} render={() =>
+                        <Messages
+                            dialogs={state.messagesPage.dialogs}
+                            messages={state.messagesPage.messages}
+                            /*friendMessage={redux.messagesPage}*/
+                            messageText={state.messagesPage.messageText}
+                            dispatch={dispatch}
+                        />}
+                    />
                 </Switch>
 
             </ContentWrapper>
