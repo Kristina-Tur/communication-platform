@@ -1,24 +1,9 @@
-import React, {ChangeEvent, useRef, useState} from 'react';
-import TextField from '@mui/material/TextField';
-import Typography from '@mui/material/Typography';
-import TwitterIcon from '@mui/icons-material/Twitter';
-import ImageIcon from '@mui/icons-material/Image';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import styled from "styled-components";
-import Button from '@mui/material/Button';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Badge from '@mui/material/Badge';
-import {ToolbarSx} from "./PostInputField.styles";
-import {Theme} from "../../../../styles/Theme";
-import {ActionType, StoreType} from "../../../../redux/store";
+
 import {addPostAC, updatePostTextAC} from "../../../../redux/profile-reducer";
 import {PostInputField} from "./PostInputField";
 import {AppRootStateType, RootState} from "../../../../redux/store-redux";
 import {connect, useDispatch, useSelector} from "react-redux";
 import {AnyAction, Dispatch} from "redux";
-import {sendMessageAC, updateMessageTextAC} from "../../../../redux/messages-reducer";
-import {MessageForm} from "../../Messages/MessageForm/MessageForm";
 
 /*type PostInputContainerPropsType = {
     store: AppRootStateType

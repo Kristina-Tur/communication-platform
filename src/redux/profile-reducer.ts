@@ -13,16 +13,10 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
     switch (action.type) {
         case 'ADD-POST': {
             const newPost = {id: v1(), postText: state.postText}
-            const copyState = {...state}
-            copyState.posts = [...state.posts]
-            copyState.posts.unshift(newPost)
-            copyState.postText = ''
-            return copyState
+            return {...state, postText: '', posts: [newPost, ...state.posts]}
         }
         case 'UPDATE-POST-TEXT': {
             return {...state, postText: action.value}
-           /* state.postText = action.value
-             state*/
         }
         default :
             return state

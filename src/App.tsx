@@ -7,15 +7,12 @@ import styled from "styled-components";
 import {Messages} from "./layout/sections/Messages/Messages";
 import {AppRootStateType} from "./redux/store-redux";
 import {useSelector} from "react-redux";
+import {ProfileContainer} from "./layout/sections/Profile/ProfileContainer";
 
 export type PostsType = {
     id: string
     postText: string
 }
-
-/*type AppPropsType = {
-    store: any
-}*/
 
 function App() {
     return (
@@ -28,13 +25,9 @@ function App() {
                     компонент Redirect для перенаправления пользователя на страницу /profile при совпадении пути /. Мы
                     также используем свойство exact, чтобы убедиться, что маршрут / совпадает только с точным путем /.*/}
                     <Route path={'/profile'} render={() =>
-                        <Profile
-                           /* store={store}*/
-                        />}/>
+                        <ProfileContainer/>}/>
                     <Route path={'/messages'} render={() =>
-                        <Messages
-                          /* store={store}*/
-                        />}
+                        <Messages/>}
                     />
                 </Switch>
 

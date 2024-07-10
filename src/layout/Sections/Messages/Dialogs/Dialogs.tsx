@@ -16,11 +16,11 @@ export type DialogListType = {
 }
 
 export const Dialogs = ({dialogs}: Props) => {
-    const [selectedDialog, setSelectedDialog] = useState(null);
+    /*const [selectedDialog, setSelectedDialog] = useState(null);
 
     const handleDialogClick = (dialog: any) => {
         setSelectedDialog(dialog);
-    };
+    };*/
 
     return (
         <List sx={{maxWidth: '150px', width: '100%', height: 'max-content',borderRight: '1px solid rgb(217, 217, 217)'}}>
@@ -28,8 +28,8 @@ export const Dialogs = ({dialogs}: Props) => {
                 <ListItem
                     key={dialog.id}
                     button
-                    onClick={() => handleDialogClick(dialog)}
-                    selected={selectedDialog === dialog}
+                    onClick={() => {/*handleDialogClick(dialog)*/}}
+                    /*selected={selectedDialog === dialog}*/
                     sx={{
                         '&:hover': {
                             bgcolor: 'action.hover',

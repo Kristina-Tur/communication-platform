@@ -2,30 +2,25 @@ import styled from "styled-components";
 import {ProfileCard} from "./ProfileCard/ProfileCard";
 import {Post} from "./Posts/Post/Post";
 import {PostsType} from "../../../App";
-import {PostInputField} from "./PostInputField/PostInputField";
 import {Container} from "../../../components/Container";
 import {Theme} from "../../../styles/Theme";
 import {Section} from "../../../components/Section";
-import {ActionType, StateType, StoreType} from "../../../redux/store";
 import {PostInputFieldContainer} from "./PostInputField/PostInputFieldContainer";
-import {AppRootStateType} from "../../../redux/store-redux";
 
 type ProfilePropsType = {
-    store: AppRootStateType
+    posts: PostsType[]
 }
 
-export const Profile = (/*{store}: ProfilePropsType*/) => {
+export const Profile = ({posts}: ProfilePropsType) => {
     return (
         <Section>
             <Container>
             <BoxWrapper>
                 <ProfileCard/>
-                <PostInputFieldContainer
-                    /*store={store}*/
-                />
+                <PostInputFieldContainer/>
             </BoxWrapper>
             <PostsWrapper>
-                {store.profilePage.posts.map(post => <Post key={post.id} postText={post.postText}/>)}
+                {posts.map(post => <Post key={post.id} postText={post.postText}/>)}
             </PostsWrapper>
             </Container>
         </Section>

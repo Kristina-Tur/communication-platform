@@ -7,20 +7,22 @@ import {ActionType, MessageType, StoreType} from "../../../redux/store";
 import {Container} from "../../../components/Container";
 import {MessageFormContainer} from "./MessageForm/MessageFormContainer";
 import {AppRootStateType} from "../../../redux/store-redux";
+import {DialogsContainer} from "./Dialogs/DialogsContainer";
+import {MessageListContainer} from "./MessageList/MessageListContainer";
 
-export type MessagesProps = {
+/*export type MessagesProps = {
    store: AppRootStateType
-};
+};*/
 
-export const Messages = ({store}: MessagesProps) => {
+export const Messages = () => {
     return (
         <StyledSection>
             <Container>
                 <Wrapper>
-                    <Dialogs dialogs={store.messagesPage.dialogs}/>
-                    <MessageList dialogs={store.messagesPage.dialogs} messages={store.messagesPage.messages} /*friendMessage={friendMessage}*//>
+                    <DialogsContainer/>
+                    <MessageListContainer /*friendMessage={friendMessage}*//>
                 </Wrapper>
-                <MessageFormContainer store={store}/>
+                <MessageFormContainer/>
             </Container>
         </StyledSection>
     );

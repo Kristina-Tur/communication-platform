@@ -44,18 +44,21 @@ const initialState = {
 export const messagesReducer = (state: MessagesPageType = initialState, action: ActionType) => {
     switch (action.type) {
         case 'SEND-MESSAGE': {
-            const newMessage = {id: 1,user: {avatar: avatar, name: 'Some Name',},
+            const newMessage = {
+                id: 1,
+                user: {
+                    avatar: avatar,
+                    name: 'Some Name'
+                },
                 messageText: {
                     text: state.messageText,
                     time: '22:00'
-                },}
-            state.messages.push(newMessage)
-            state.messageText = ''
-            return state
+                }
+            }
+            return {...state, messageText: '', messages: [...state.messages, newMessage]}
         }
         case 'UPDATE-MESSAGE-TEXT': {
-            state.messageText = action.value
-            return state
+            return {...state, messageText: action.value}
         }
         default :
             return state

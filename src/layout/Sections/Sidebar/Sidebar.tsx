@@ -8,10 +8,12 @@ import MusicNoteIcon from '@mui/icons-material/MusicNote';
 import SettingsIcon from '@mui/icons-material/Settings';
 import {ListItemIcon} from "@mui/material";
 import {MenuType} from "../../../redux/store";
+import {useSelector} from "react-redux";
+import {AppRootStateType} from "../../../redux/store-redux";
 
-type SidebarPropsType = {
+/*type SidebarPropsType = {
     sidebar: MenuType[]
-}
+}*/
 
 type IconsType = {
     [key: string]: React.ReactNode
@@ -24,12 +26,13 @@ const icons: IconsType = {
     'Music': <MusicNoteIcon />,
     'Settings': <SettingsIcon />,
 };
-export const Sidebar = ({sidebar}: SidebarPropsType) => {
+export const Sidebar = () => {
+    const sidebarMenu = useSelector<AppRootStateType, MenuType[]>(state => state.sidebar.menu)
     return (
         <S.Aside>
             <nav>
                 <ul>
-                    {sidebar.map(item => {
+                    {sidebarMenu.map(item => {
                             return (
                                 <S.ListItem key={item.id}>
                                     <ListItemIcon sx={{minWidth: '35px'}}>{icons[item.title]}</ListItemIcon>
