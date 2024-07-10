@@ -1,23 +1,22 @@
 import React, {ChangeEvent, FormEvent, useRef, useState} from 'react';
 import { TextField, Button, Grid } from '@mui/material';
-import {ActionType} from "../../../../redux/store";
-import {sendMessageAC, updateMessageTextAC} from "../../../../redux/messages-reducer";
 
 type MessageFormType = {
+    updateMessageText: (value: string) => void
+    sendMessage: () => void
     messageText: string
-    dispatch: (action: ActionType) => void
 }
 
-export const MessageForm = ({messageText, dispatch}: MessageFormType) => {
+export const MessageForm = ({updateMessageText, sendMessage, messageText}: MessageFormType) => {
 
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.currentTarget) {
-            dispatch(updateMessageTextAC(e.currentTarget.value))
+            updateMessageText(e.currentTarget.value)
         }
     }
 
     const onClickHandler = () => {
-        dispatch(sendMessageAC())
+        sendMessage()
     }
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {

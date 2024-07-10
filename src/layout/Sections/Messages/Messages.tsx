@@ -3,26 +3,24 @@ import {MessageForm} from "./MessageForm/MessageForm";
 import {Dialogs, DialogListType} from "./Dialogs/Dialogs";
 import styled from "styled-components";
 import {MessageList} from "./MessageList/MessageList";
-import {ActionType, MessageType} from "../../../redux/store";
+import {ActionType, MessageType, StoreType} from "../../../redux/store";
 import {Container} from "../../../components/Container";
+import {MessageFormContainer} from "./MessageForm/MessageFormContainer";
+import {AppRootStateType} from "../../../redux/store-redux";
 
 export type MessagesProps = {
-    dialogs: DialogListType[]
-    messages: MessageType[]
-    /*friendMessage: MessageType*/
-    messageText: string
-    dispatch: (action: ActionType) => void
+   store: AppRootStateType
 };
 
-export const Messages = ({dialogs, messages, messageText, dispatch}: MessagesProps) => {
+export const Messages = ({store}: MessagesProps) => {
     return (
         <StyledSection>
             <Container>
                 <Wrapper>
-                    <Dialogs dialogs={dialogs}/>
-                    <MessageList dialogs={dialogs} messages={messages} /*friendMessage={friendMessage}*//>
+                    <Dialogs dialogs={store.messagesPage.dialogs}/>
+                    <MessageList dialogs={store.messagesPage.dialogs} messages={store.messagesPage.messages} /*friendMessage={friendMessage}*//>
                 </Wrapper>
-                <MessageForm messageText={messageText} dispatch={dispatch}/>
+                <MessageFormContainer store={store}/>
             </Container>
         </StyledSection>
     );

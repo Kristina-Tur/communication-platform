@@ -54,6 +54,10 @@ export type MessagesPageType = {
     messageText: string
 }
 
+export type SidebarType = {
+    menu: MenuType[]
+}
+
 export type StateType = {
     sidebar: {
         menu: MenuType[]

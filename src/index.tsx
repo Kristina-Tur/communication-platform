@@ -6,16 +6,16 @@ import {ThemeProvider} from "styled-components";
 import {Theme} from "./styles/Theme";
 import {GlobalStyles} from "./styles/GlobalStyles";
 import {BrowserRouter} from "react-router-dom";
-import {StateType, store} from './redux/store'
+import {store} from './redux/store-redux'
+import {Provider} from "react-redux";
 
 let rerenderEntireTree = () => {
     ReactDOM.render(
         <ThemeProvider theme={Theme}>
             <BrowserRouter>
-                <App
-                    state={store.getState()}
-                    dispatch = {store.dispatch.bind(store)}
-                />
+                <Provider store={store}>
+                    <App/>
+                </Provider>
                 <GlobalStyles/>
             </BrowserRouter>
         </ThemeProvider>,

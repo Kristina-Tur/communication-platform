@@ -15,22 +15,22 @@ import {ActionType} from "../../../../redux/store";
 import {addPostAC, updatePostTextAC} from "../../../../redux/profile-reducer";
 
 type PostInputPropsType = {
+    updatePostText: (value: string) => void
+    addPost: () => void
     postText: string
-    dispatch: (action: ActionType) => void
 }
 
-export const PostInputField = ({postText, dispatch}: PostInputPropsType) => {
+export const PostInputField = ({updatePostText, addPost, postText}: PostInputPropsType) => {
     const textareaRef = useRef<HTMLInputElement>(null)
 
     const onChangeHandler = () => {
         if (textareaRef.current) {
-            dispatch(updatePostTextAC(textareaRef.current.value))
-            console.log(textareaRef.current.value)
+            updatePostText(textareaRef.current.value)
         }
     }
 
     const onClickHandler = () => {
-            dispatch(addPostAC())
+            addPost()
     }
 
     return (
