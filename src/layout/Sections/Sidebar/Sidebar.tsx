@@ -7,13 +7,17 @@ import NewspaperIcon from '@mui/icons-material/Newspaper';
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
 import SettingsIcon from '@mui/icons-material/Settings';
 import {ListItemIcon} from "@mui/material";
-import {MenuType} from "../../../redux/store";
 import {useSelector} from "react-redux";
 import {AppRootStateType} from "../../../redux/store-redux";
 
-/*type SidebarPropsType = {
-    sidebar: MenuType[]
-}*/
+export type MenuType = {
+    id: string
+    href: string
+    title: string
+}
+export type SidebarType = {
+    menu: MenuType[]
+}
 
 type IconsType = {
     [key: string]: React.ReactNode

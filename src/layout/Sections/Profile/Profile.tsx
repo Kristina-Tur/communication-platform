@@ -1,11 +1,13 @@
 import styled from "styled-components";
 import {ProfileCard} from "./ProfileCard/ProfileCard";
 import {Post} from "./Posts/Post/Post";
-import {PostsType} from "../../../App";
 import {Container} from "../../../components/Container";
 import {Theme} from "../../../styles/Theme";
 import {Section} from "../../../components/Section";
 import {PostInputFieldContainer} from "./PostInputField/PostInputFieldContainer";
+import {PostsType} from "../../../redux/profile-reducer";
+
+
 
 type ProfilePropsType = {
     posts: PostsType[]

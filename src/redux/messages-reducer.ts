@@ -1,6 +1,34 @@
-import {ActionType, MessagesPageType, ProfilePageType} from "./store";
 import avatar from "../assets/images/avatar.png";
 
+type UserType = {
+    avatar: string
+    name: string
+}
+type MessageTextType = {
+    text: string
+    time: string
+}
+export type MessageType = {
+    id: number
+    user: UserType
+    messageText: MessageTextType
+}
+export type DialogsType = {
+    id: number
+    name: string
+    avatar: string
+}
+export type MessagesPageType = {
+    dialogs: DialogsType[]
+    messages: MessageType[]
+    messageText: string
+}
+
+type UpdateMessageTextActionType = ReturnType<typeof updateMessageTextAC>
+type SendMessageActionType = ReturnType<typeof sendMessageAC>
+export type MessagesReducerActionType =
+    UpdateMessageTextActionType |
+    SendMessageActionType
 
 const initialState = {
     dialogs: [
@@ -41,7 +69,7 @@ const initialState = {
     messageText: ''
 }
 
-export const messagesReducer = (state: MessagesPageType = initialState, action: ActionType) => {
+export const messagesReducer = (state: MessagesPageType = initialState, action: MessagesReducerActionType) => {
     switch (action.type) {
         case 'SEND-MESSAGE': {
             const newMessage = {

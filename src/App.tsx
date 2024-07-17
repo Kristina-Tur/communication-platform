@@ -1,18 +1,11 @@
 import * as React from 'react';
 import {Header} from "./layout/header/Header";
 import {Sidebar} from "./layout/sections/Sidebar/Sidebar";
-import {Profile} from "./layout/sections/Profile/Profile";
-import {Redirect, Route, Router, Switch} from "react-router-dom";
+import {Redirect, Route, Switch} from "react-router-dom";
 import styled from "styled-components";
 import {Messages} from "./layout/sections/Messages/Messages";
-import {AppRootStateType} from "./redux/store-redux";
-import {useSelector} from "react-redux";
 import {ProfileContainer} from "./layout/sections/Profile/ProfileContainer";
-
-export type PostsType = {
-    id: string
-    postText: string
-}
+import {UsersContainer} from "./layout/sections/Users/UsersContainer";
 
 function App() {
     return (
@@ -28,6 +21,9 @@ function App() {
                         <ProfileContainer/>}/>
                     <Route path={'/messages'} render={() =>
                         <Messages/>}
+                    />
+                    <Route path={'/users'} render={() =>
+                        <UsersContainer/>}
                     />
                 </Switch>
 

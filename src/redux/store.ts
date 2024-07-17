@@ -1,5 +1,6 @@
+
 import avatar from "../assets/images/avatar.png";
-import {v1} from "uuid";
+/*import {v1} from "uuid";
 import {
     addPostAC,
     profileReducer,
@@ -18,41 +19,21 @@ type PostsType = {
     postText: string
 }
 
-export type DialogsType = {
-    id: number
-    name: string
-    avatar: string
-}
 
-type UserType = {
-    avatar: string
-    name: string
-}
 
-type MessageTextType = {
-    text: string
-    time: string
-}
 
-export type MessageType = {
-    id: number
-    user: UserType
-    messageText: MessageTextType
-}
 
-type MessagesType = {
+
+
+/!*type MessagesType = {
     [key: string]: MessageType
-}
+}*!/
 
 export type ProfilePageType = {
     posts: PostsType[]
     postText: string
 }
-export type MessagesPageType = {
-    dialogs: DialogsType[]
-    messages: MessageType[]
-    messageText: string
-}
+
 
 export type SidebarType = {
     menu: MenuType[]
@@ -67,8 +48,8 @@ export type StateType = {
         postText: string
     },
     messagesPage: {
-        dialogs: DialogsType[]
-        messages: MessageType[]
+       /!* dialogs: DialogsType[]
+        messages: MessageType[]*!/
         messageText: string
     }
 }
@@ -131,7 +112,7 @@ export let store: StoreType = {
                 {id: 6, name: 'Alex', avatar: 'https://via.placeholder.com/150/92c952'},
             ],
             messages: [
-                /*message: */{
+                /!*message: *!/{
                     id: 0,
                     user: {
                         avatar: avatar,
@@ -143,7 +124,7 @@ export let store: StoreType = {
                     }
                     }
                 ],
-                /*friendMessage: {
+                /!*friendMessage: {
                     id: 100,
                     user:
                         {
@@ -156,7 +137,7 @@ export let store: StoreType = {
                     },
                 },
             },
-*/
+*!/
             messageText: ''
         }
     },
@@ -178,3 +159,4 @@ export let store: StoreType = {
 
 
 
+*/
