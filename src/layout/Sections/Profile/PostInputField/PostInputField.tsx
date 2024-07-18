@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useRef, useState} from 'react';
+import React, {useRef} from 'react';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import TwitterIcon from '@mui/icons-material/Twitter';
@@ -11,8 +11,6 @@ import IconButton from '@mui/material/IconButton';
 import Badge from '@mui/material/Badge';
 import {ToolbarSx} from "./PostInputField.styles";
 import {Theme} from "../../../../styles/Theme";
-import {ActionType} from "../../../../redux/store";
-import {addPostAC, updatePostTextAC} from "../../../../redux/profile-reducer";
 
 type PostInputPropsType = {
     updatePostText: (value: string) => void

@@ -1,7 +1,7 @@
 import React from 'react'
-import {MessageType} from "../../../../../redux/store";
 import styled from "styled-components";
 import {Theme} from "../../../../../styles/Theme";
+import {MessageType} from "../../../../../redux/messages-reducer";
 
 // нужно создать правильный тип вместо any
 export type MessagePropsType = {

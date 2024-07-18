@@ -1,13 +1,10 @@
 import React from 'react'
-import s2 from '../App.module.css'
-import avatar from '../../../../assets/images/avatar.png'
 import {Message} from "./Message/Message";
-import {FriendMessage} from "./FriendMessage/FriendMessage";
-import {MessageType} from "../../../../redux/store";
 import styled from "styled-components";
 import {Avatar, ListItemAvatar} from "@mui/material";
 import ListItemText from "@mui/material/ListItemText";
 import {DialogListType} from "../Dialogs/Dialogs";
+import {MessageType} from "../../../../redux/messages-reducer";
 
 type Props = {
     dialogs: DialogListType[]
