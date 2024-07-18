@@ -18,39 +18,11 @@ type SetUsersActionType = ReturnType<typeof setUsersAC>
 export type UsersReducerActionType =
     SendMessageActionType | SetUsersActionType
 
-const initialState = {
-    users: [
-        {
-            id: '1',
-            name: 'Max',
-            avatar: 'https://via.placeholder.com/150/92c952',
-            isFollow: true,
-            status: 'I like football',
-            country: 'Belarus',
-            city: 'Brest'
-        },
-        {
-            id: '2',
-            name: 'John',
-            avatar: 'https://via.placeholder.com/150/771796',
-            isFollow: true,
-            status: 'I like swim',
-            country: 'US',
-            city: 'New York'
-        },
-        {
-            id: '3',
-            name: 'Mike',
-            avatar: 'https://via.placeholder.com/150/24f355',
-            isFollow: false,
-            status: 'I like football',
-            country: 'Belarus',
-            city: 'Minsk'
-        }
-    ]
+const initialState: UsersPageType = {
+    users: []
 }
 
-export const usersReducer = (state: UsersPageType = initialState, action: UsersReducerActionType) => {
+export const usersReducer = (state: UsersPageType = initialState, action: UsersReducerActionType): UsersPageType => {
     switch (action.type) {
         case "FOLLOW":
             return {...state, users: state.users.map(user => user.id === action.payload.userId
