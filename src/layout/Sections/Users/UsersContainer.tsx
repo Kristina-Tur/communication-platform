@@ -2,21 +2,21 @@ import {AnyAction, Dispatch} from "redux";
 import {connect} from "react-redux";
 import {Users} from "./Users";
 import {RootState} from "../../../redux/store-redux";
-import {followUserAC, setUsersAC} from "../../../redux/users-reducer";
+import {followUserAC, setUsersAC, UsersPageType, UserType} from "../../../redux/users-reducer";
 
 
 const mapStateToProps = (state: RootState) => {
     return {
-        users: state.usersPage.users,
+        users: state.usersPage.items,
     }
 }
 const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => {
     return {
-        followUser: (userId: string, isFollow: boolean) => {
+        followUser: (userId: number, isFollow: boolean) => {
             dispatch(followUserAC(userId, isFollow))
         },
-        setUsers: () => {
-            /*dispatch(setUsersAC(users))*/
+        setUsers: (users: UserType[]) => {
+            dispatch(setUsersAC(users))
         }
     }
 }
