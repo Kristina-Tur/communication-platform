@@ -8,19 +8,19 @@ export type UserType = {
     status: string
     country: string
     city: string*/
-    "name": string
-    "id": number
-    "photos": {
+    name: string
+    id: number
+    photos: {
         "small": null,
         "large": null
     },
-    "status": null,
-    "followed": boolean
+    status: null,
+    followed: boolean
 }
 export type UsersPageType = {
-    "items": UserType[]
-    "totalCount": number
-    "error": null
+    items: UserType[]
+    totalCount: number
+    error: null
 }
 
 type SendMessageActionType = ReturnType<typeof followUserAC>
@@ -29,9 +29,9 @@ export type UsersReducerActionType =
     SendMessageActionType | SetUsersActionType
 
 const initialState: UsersPageType = {
-    "items": [],
-    "totalCount": 5,
-    "error": null
+    items: [],
+    totalCount: 5,
+    error: null
 }
 
 export const usersReducer = (state: UsersPageType = initialState, action: UsersReducerActionType): UsersPageType => {
