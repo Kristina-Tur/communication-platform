@@ -1,113 +1,120 @@
 import * as React from 'react';
-import {UsersPageType, UserType} from "../../../redux/users-reducer";
-import Avatar from "@mui/material/Avatar";
-import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
+import styled from "styled-components";
+import {UserType} from "../../../redux/users-reducer";
+import Box from "@mui/material/Box";
+import Avatar from "@mui/material/Avatar";
+import avatar from "../../../assets/images/avatar.png";
 import Divider from "@mui/material/Divider";
 import {Grid} from "@mui/material";
-import styled from "styled-components";
-import {v1} from "uuid";
-import axios from "axios";
-import avatar from './../../../assets/images/avatar.png'
+import Typography from "@mui/material/Typography";
+import {Loader} from "../../../components/loader/Loader";
+import {useSelector} from "react-redux";
+import {AppRootStateType} from "../../../redux/store-redux";
 
-
-type Props = {
+type UsersPropsType = {
     users: UserType[]
-    followUser: (userId: number, isFollow: boolean) => void
-    setUsers: (users: UserType[]) => void
-}
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
+    handleFollowUser: (userId: number, isFollow: boolean) => void
+    handlePageChange: (page: number) => void
 
-const instance = {
-    withCredentials: true,
-    headers: {
-        "API-KEY": "0d6fcc4b-d0b8-4c34-b068-91acef8dc727"
-    }
-}
+};
+export const Users = ({
+                          users,
+                          currentPage,
+                          pageSize,
+                          handleFollowUser,
+                          totalUsersCount,
+                          handlePageChange
+                      }: UsersPropsType) => {
 
-export const Users = ({users, followUser, setUsers}: Props) => {
-    axios.get('https://social-network.samuraijs.com/api/1.0/users', instance)
-        .then(res => setUsers(res.data.items))
-    /*if (users.length === 0) {
-        setUsers([
-            {
-                id: v1(),
-                name: 'Max',
-                avatar: 'https://via.placeholder.com/150/92c952',
-                isFollow: true,
-                status: 'I like football',
-                country: 'Belarus',
-                city: 'Brest'
-            },
-            {
-                id: v1(),
-                name: 'John',
-                avatar: 'https://via.placeholder.com/150/771796',
-                isFollow: true,
-                status: 'I like swim',
-                country: 'US',
-                city: 'New York'
-            },
-            {
-                id: v1(),
-                name: 'Mike',
-                avatar: 'https://via.placeholder.com/150/24f355',
-                isFollow: false,
-                status: 'I like football',
-                country: 'Belarus',
-                city: 'Minsk'
-            }
-        ])
-    }*/
+    let totalPages = Math.ceil(totalUsersCount / pageSize);
+    const pages = [];
 
-
-    const onClickHandler = (userId: number, isFollow: boolean) => {
-        followUser(userId, isFollow)
-    }
-    const onClickShowMoreHandler = () => {
-
+    // Отображаем первые 3 страницы
+    for (let i = 1; i <= Math.min(3, totalPages); i++) {
+        pages.push(i);
     }
 
+    // Если текущая страница больше 3, добавляем "..."
+    if (currentPage > 3) {
+        pages.push('...');
+    }
+
+    // Отображаем страницы вокруг текущей страницы
+    const startPage = Math.max(currentPage - 1, 4);
+    const endPage = Math.min(currentPage + 1, totalPages - 1);
+    for (let i = startPage; i <= endPage; i++) {
+        pages.push(i);
+    }
+
+    // Если текущая страница меньше totalPages - 2, добавляем "..."
+    if (currentPage < totalPages - 2) {
+        pages.push('...');
+    }
+
+    // Отображаем последние 3 страницы
+    for (let i = Math.max(totalPages - 2, currentPage + 2); i <= totalPages; i++) {
+        pages.push(i);
+    }
+    const isLoading = useSelector<AppRootStateType, boolean>(state => state.app.isLoading)
     return (
         <StyledSection>
             <h1>Users</h1>
-            {users.map(user => {
-                return (
-                    <Box key={user.id} width="100%" p={2} display="flex" alignItems="center"
-                         justifyContent="space-between">
-                        <Box width="25%" display="flex" flexDirection="column" alignItems="center">
-                            <Avatar alt={'user'} src={user.photos.small === null ? avatar : user.photos.small}
-                                    sx={{width: 100, height: 100, mb: 2}}/>
-                            <Button variant="contained" sx={{mt: 2}}
-                                    onClick={() => onClickHandler(user.id, user.followed)}>{user.followed ? 'Follow' : 'Unfollow'}
-                            </Button>
+            <div>
+                {isLoading && <Loader/> }
+                <div className="pagination">
+                    {pages.map((page, index) => (
+                        <button
+                            key={index}
+                            onClick={() => typeof page === 'number' && handlePageChange(page)}
+                            disabled={page === currentPage || typeof page !== 'number'}
+                            style={{margin: '0 5px', padding: '5px 10px', cursor: 'pointer', fontSize: '24px'}}
+                        >
+                            {page}
+                        </button>
+                    ))}
+                </div>
+                <div>
+                    {users.map((user: UserType) => (
+                        <Box key={user.id} width="100%" p={2} display="flex" alignItems="center"
+                             justifyContent="space-between">
+                            <Box width="25%" display="flex" flexDirection="column" alignItems="center">
+                                <Avatar alt={'user'} src={user.photos.small === null ? avatar : user.photos.small}
+                                        sx={{width: 100, height: 100, mb: 2}}/>
+                                <Button variant="contained" sx={{mt: 2}}
+                                        onClick={() => handleFollowUser(user.id, user.followed)}>{user.followed ? 'Follow' : 'Unfollow'}
+                                </Button>
+                            </Box>
+                            <Divider orientation="vertical" flexItem sx={{mx: 2}}/>
+                            <Box width="70%">
+                                <Grid container spacing={2}>
+                                    <Grid item xs={12}>
+                                        <Typography variant="h5">{user.name}</Typography>
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                        <Typography variant="subtitle1">{user.status}</Typography>
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                        <Typography variant="body1">England, London</Typography>
+                                    </Grid>
+                                </Grid>
+                            </Box>
                         </Box>
-                        <Divider orientation="vertical" flexItem sx={{mx: 2}}/>
-                        <Box width="70%">
-                            <Grid container spacing={2}>
-                                <Grid item xs={12}>
-                                    <Typography variant="h5">{user.name}</Typography>
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <Typography variant="subtitle1">{user.status}</Typography>
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <Typography variant="body1">England, London</Typography>
-                                </Grid>
-                            </Grid>
-                        </Box>
-                    </Box>
-                )
-            })}
+                    ))}
+                </div>
+            </div>
             <Button variant="contained" sx={{mt: 2}}
-                    onClick={() => onClickShowMoreHandler()}>Show more</Button>
+                    onClick={() => {
+                    }}>Show more</Button>
         </StyledSection>
     );
 };
 
 const StyledSection = styled.div`
     flex-grow: 1;
-
     height: calc(100vh - 60px);
     background-color: #c8e0ff33;
 `

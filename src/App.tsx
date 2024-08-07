@@ -7,6 +7,9 @@ import {Messages} from "./layout/sections/Messages/Messages";
 import {ProfileContainer} from "./layout/sections/Profile/ProfileContainer";
 import {UsersContainer} from "./layout/sections/Users/UsersContainer";
 import {useState} from "react";
+import {Loader} from "./components/loader/Loader";
+import {useSelector} from "react-redux";
+import {AppRootStateType} from "./redux/store-redux";
 
 function App() {
 
@@ -15,6 +18,7 @@ function App() {
             <Header/>
             <ContentWrapper>
                 <Sidebar/>
+
                 <Switch>
                     <Route exact path="/samurai-way-main" render={() => <Redirect to='/profile'/>}/>{/*В этом примере мы используем
                     компонент Redirect для перенаправления пользователя на страницу /profile при совпадении пути /. Мы
@@ -28,7 +32,6 @@ function App() {
                         <UsersContainer/>}
                     />
                 </Switch>
-
             </ContentWrapper>
         </div>
     );
