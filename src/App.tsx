@@ -6,8 +6,10 @@ import styled from "styled-components";
 import {Messages} from "./layout/sections/Messages/Messages";
 import {ProfileContainer} from "./layout/sections/Profile/ProfileContainer";
 import {UsersContainer} from "./layout/sections/Users/UsersContainer";
+import {useState} from "react";
 
 function App() {
+
     return (
         <div>
             <Header/>
