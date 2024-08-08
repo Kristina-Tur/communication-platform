@@ -14,6 +14,7 @@ import axios from "axios";
 import React, {Component} from "react";
 import {Users} from "./Users";
 import {setAppLoaderAC} from "../../../redux/app-reducer";
+import {instance} from "../../../api/API";
 
 
 type UsersProps = {
@@ -28,13 +29,7 @@ type UsersProps = {
     setAppLoading: (isLoading: boolean) => void
 }
 
-const instance = axios.create({
-    baseURL: 'https://social-network.samuraijs.com/api/1.0/',
-    withCredentials: true,
-    headers: {
-        'API-KEY': '0d6fcc4b-d0b8-4c34-b068-91acef8dc727'
-    }
-});
+
 
 export class UsersAPIComponent extends Component<UsersProps, any> {
     componentDidMount() {
@@ -91,24 +86,11 @@ const mapStateToProps = (state: RootState) => {
         isLoading: state.app.isLoading
     }
 }
-const mapDispatchToProps = (dispatch: Dispatch) => {
-    return {
-        followUser: (userId: number, isFollow: boolean) => {
-            dispatch(followUserAC(userId, isFollow))
-        },
-        setUsers: (users: UserType[]) => {
-            dispatch(setUsersAC(users))
-        },
-        setCurrentPage: (currentPage: number) => {
-            dispatch(setCurrentPageAC(currentPage))
-        },
-        setTotalUsersCount: (totalUsersCount: number) => {
-            dispatch(setTotalUsersCountAC(totalUsersCount))
-        },
-        setAppLoading: (isLoading: boolean) => {
-            dispatch(setAppLoaderAC(isLoading))
-        }
-    }
-}
 
-export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersAPIComponent)
+export const UsersContainer = connect(mapStateToProps, {
+    followUser: followUserAC,
+    setUsers: setUsersAC,
+    setCurrentPage: setCurrentPageAC,
+    setTotalUsersCount: setTotalUsersCountAC,
+    setAppLoading: setAppLoaderAC
+})(UsersAPIComponent)

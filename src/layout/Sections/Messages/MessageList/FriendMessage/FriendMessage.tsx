@@ -4,13 +4,13 @@ import {Theme} from "../../../../../styles/Theme";
 import {MessageType} from "../../../../../redux/messages-reducer";
 
 type FriendMessagePropsType = {
-    messages: MessageType[]
+    friendMessages: MessageType[]
 }
 
-export const FriendMessage = ({messages}: FriendMessagePropsType) => {
+export const FriendMessage = ({friendMessages}: FriendMessagePropsType) => {
     return (
         <>
-            {messages.map(message => {
+            {friendMessages.map(message => {
                 return  <MessageWrapper key={message.id}>
                     <ImgWrapper>
                         <img

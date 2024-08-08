@@ -7,7 +7,8 @@ import {MessageList} from "./MessageList";
 const mapStateToProps = (state: RootState) => {
     return {
         dialogs: state.messagesPage.dialogs,
-        messages: state.messagesPage.messages
+        messages: state.messagesPage.messages,
+        friendMessages: state.messagesPage.friendMessages,
     }
 }
 const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => {

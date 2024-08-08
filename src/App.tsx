@@ -1,30 +1,29 @@
 import * as React from 'react';
-import {Header} from "./layout/header/Header";
 import {Sidebar} from "./layout/sections/Sidebar/Sidebar";
-import {Redirect, Route, Switch} from "react-router-dom";
+import {Route, Switch} from "react-router-dom";
 import styled from "styled-components";
 import {Messages} from "./layout/sections/Messages/Messages";
-import {ProfileContainer} from "./layout/sections/Profile/ProfileContainer";
 import {UsersContainer} from "./layout/sections/Users/UsersContainer";
-import {useState} from "react";
-import {Loader} from "./components/loader/Loader";
-import {useSelector} from "react-redux";
-import {AppRootStateType} from "./redux/store-redux";
+import ProfileContainer from "./layout/sections/Profile/ProfileContainer";
+import HeaderContainer from "./layout/header/HeaderContainer";
 
+/**/
 function App() {
 
     return (
         <div>
-            <Header/>
+            <HeaderContainer/>
             <ContentWrapper>
                 <Sidebar/>
 
                 <Switch>
-                    <Route exact path="/samurai-way-main" render={() => <Redirect to='/profile'/>}/>{/*В этом примере мы используем
+                    {/*<Route exact path="/samurai-way-main" render={() => <Redirect to='/profile'/>}/>В этом примере мы используем
                     компонент Redirect для перенаправления пользователя на страницу /profile при совпадении пути /. Мы
                     также используем свойство exact, чтобы убедиться, что маршрут / совпадает только с точным путем /.*/}
-                    <Route path={'/profile'} render={() =>
+                    <Route path={'/profile/:userId?'} render={() =>
                         <ProfileContainer/>}/>
+                   {/* <Route path="/profile" element={<ProfileContainer isMain={true}/>} />
+                    <Route path="/profile/:userId" element={<ProfileContainer />} />*/}
                     <Route path={'/messages'} render={() =>
                         <Messages/>}
                     />

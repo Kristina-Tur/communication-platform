@@ -5,30 +5,30 @@ import {Container} from "../../../components/Container";
 import {Theme} from "../../../styles/Theme";
 import {Section} from "../../../components/Section";
 import {PostInputFieldContainer} from "./PostInputField/PostInputFieldContainer";
-import {PostsType} from "../../../redux/profile-reducer";
-
+import {PostsType, ProfileType} from "../../../redux/profile-reducer";
 
 
 type ProfilePropsType = {
     posts: PostsType[]
+    profile: ProfileType
 }
 
-export const Profile = ({posts}: ProfilePropsType) => {
+export const Profile = ({posts, profile}: ProfilePropsType) => {
+    console.log('Profile')
     return (
         <Section>
             <Container>
-            <BoxWrapper>
-                <ProfileCard/>
-                <PostInputFieldContainer/>
-            </BoxWrapper>
-            <PostsWrapper>
-                {posts.map(post => <Post key={post.id} postText={post.postText}/>)}
-            </PostsWrapper>
+                <BoxWrapper>
+                    <ProfileCard profile={profile}/>
+                    <PostInputFieldContainer/>
+                </BoxWrapper>
+                <PostsWrapper>
+                    {posts.map(post => <Post key={post.id} postText={post.postText}/>)}
+                </PostsWrapper>
             </Container>
         </Section>
     );
 };
-
 
 
 const BoxWrapper = styled.div`
@@ -36,7 +36,7 @@ const BoxWrapper = styled.div`
     justify-content: space-around;
     gap: 20px;
 
-    @media ${Theme.media.desktop}{
+    @media ${Theme.media.desktop} {
         flex-direction: column;
         align-items: center;
         gap: 50px;

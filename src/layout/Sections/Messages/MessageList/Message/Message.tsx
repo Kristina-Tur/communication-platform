@@ -40,6 +40,7 @@ export const Message = ({messages}: MessagePropsType) => {
 
 const MessageWrapper = styled.div`
     margin-bottom: 30px;
+    
 `
 const ImgWrapper = styled.div`
     display: flex;
@@ -61,6 +62,7 @@ const TextWrapper = styled.div`
     border-radius: 10px;
     padding: 8px 35px 8px 13px;
     max-width: 527px;
+    overflow: auto;
 `
 
 const NameWrapper = styled.div`

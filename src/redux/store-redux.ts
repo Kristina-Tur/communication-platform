@@ -5,6 +5,7 @@ import {sidebarReducer} from "./sidebar-reducer";
 import {SidebarType} from "../layout/sections/Sidebar/Sidebar";
 import {UsersPageType, usersReducer} from "./users-reducer";
 import {appReducer, AppType} from "./app-reducer";
+import {AuthDataType, authReducer} from "./auth-reducer";
 
 export type AppRootStateType = ReturnType<typeof reducers>
 
@@ -14,6 +15,7 @@ export type RootState = CombinedState<{
     messagesPage: MessagesPageType;
     usersPage: UsersPageType;
     app: AppType
+    auth: AuthDataType
 }>;
 
 const reducers = combineReducers({
@@ -21,7 +23,8 @@ const reducers = combineReducers({
     profilePage: profileReducer,
     messagesPage: messagesReducer,
     usersPage: usersReducer,
-    app: appReducer
+    app: appReducer,
+    auth: authReducer
 })
 
 export const store: Store<AppRootStateType, any> = createStore(reducers)

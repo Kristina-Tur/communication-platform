@@ -5,14 +5,15 @@ import {Avatar, ListItemAvatar} from "@mui/material";
 import ListItemText from "@mui/material/ListItemText";
 import {DialogListType} from "../Dialogs/Dialogs";
 import {MessageType} from "../../../../redux/messages-reducer";
+import {FriendMessage} from "./FriendMessage/FriendMessage";
 
 type Props = {
     dialogs: DialogListType[]
     messages: MessageType[]
-   /* friendMessage: MessageType*/
+    friendMessages: MessageType[]
 }
 
-export const MessageList = ({dialogs, messages}: Props) => {
+export const MessageList = ({dialogs, messages, friendMessages}: Props) => {
     return (
         <MessageListWrapper>
             <ListItemWrapper>
@@ -23,7 +24,7 @@ export const MessageList = ({dialogs, messages}: Props) => {
             </ListItemWrapper>
             <MessageWrapper>
                 <Message messages={messages}/>
-               {/* <FriendMessage messages={messages}/>*/}
+                <FriendMessage friendMessages={friendMessages}/>
             </MessageWrapper>
         </MessageListWrapper>
     )
@@ -47,8 +48,8 @@ const ListItemWrapper = styled.div`
 const MessageWrapper = styled.div`
     border-top: 1px solid rgb(217, 217, 217);
     border-bottom: 1px solid rgb(217, 217, 217);
-    padding-top: 25px;
-    padding-bottom: 30px;
+    padding: 30px;
     height: 550px;
+    overflow: auto;
     
 `

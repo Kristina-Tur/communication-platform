@@ -1,4 +1,5 @@
 import avatar from "../assets/images/avatar.png";
+import {v1} from "uuid";
 
 type UserType = {
     avatar: string
@@ -9,7 +10,7 @@ type MessageTextType = {
     time: string
 }
 export type MessageType = {
-    id: number
+    id: string
     user: UserType
     messageText: MessageTextType
 }
@@ -21,6 +22,7 @@ export type DialogsType = {
 export type MessagesPageType = {
     dialogs: DialogsType[]
     messages: MessageType[]
+    friendMessages: MessageType[]
     messageText: string
 }
 
@@ -31,41 +33,39 @@ export type MessagesReducerActionType =
     SendMessageActionType
 
 const initialState = {
-    dialogs: [
-        {id: 1, name: 'Max', avatar: 'https://via.placeholder.com/150/92c952'},
-        {id: 2, name: 'John', avatar: 'https://via.placeholder.com/150/771796'},
-        {id: 3, name: 'Mike', avatar: 'https://via.placeholder.com/150/24f355'},
-        {id: 4, name: 'Jane', avatar: 'https://via.placeholder.com/150/771796'},
-        {id: 5, name: 'Mike', avatar: 'https://via.placeholder.com/150/24f355'},
-        {id: 6, name: 'Alex', avatar: 'https://via.placeholder.com/150/92c952'},
-    ],
-    messages: [
-        /*message: */{
-            id: 0,
-            user: {
-                avatar: avatar,
-                name: 'Some Name',
-            },
-            messageText: {
-                text: 'some textsome textsome textsome textsome textsome textsome text',
-                time: '22:00'
-            }
-        }
-    ],
-    /*friendMessage: {
-        id: 100,
-        user:
+        dialogs: [
+            {id: 1, name: 'Max', avatar: 'https://via.placeholder.com/150/92c952'},
+            {id: 2, name: 'John', avatar: 'https://via.placeholder.com/150/771796'},
+            {id: 3, name: 'Mike', avatar: 'https://via.placeholder.com/150/24f355'},
+            {id: 4, name: 'Jane', avatar: 'https://via.placeholder.com/150/771796'},
+            {id: 5, name: 'Mike', avatar: 'https://via.placeholder.com/150/24f355'},
+            {id: 6, name: 'Alex', avatar: 'https://via.placeholder.com/150/92c952'},
+        ],
+        messages: [
             {
-                avatar: avatar,
-                name: 'Friend Name',
+                id: v1(),
+                user: {
+                    avatar: avatar,
+                    name: 'Some Name',
+                },
+                messageText: {
+                    text: 'some textsome textsome textsome textsome textsome textsome text',
+                    time: '22:00'
+                }
+            }
+        ],
+        friendMessages: [{
+            id: v1(),
+            user:
+                {
+                    avatar: avatar,
+                    name: 'Friend Name',
+                },
+            messageText: {
+                text: 'Hello',
+                time: '22:00',
             },
-        messageText: {
-            text: 'зеркальное сообщение',
-            time: '22:00',
-        },
-    },
-},
-*/
+        }],
     messageText: ''
 }
 

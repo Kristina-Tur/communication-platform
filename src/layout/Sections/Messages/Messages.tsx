@@ -21,8 +21,7 @@ export const Messages = () => {
 
 const StyledSection = styled.div`
     flex-grow: 1;
-    
-    height: calc(100vh - 60px);
+    min-height: calc(100vh - 60px);
     background-color: #c8e0ff33;
 `
 
