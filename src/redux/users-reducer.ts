@@ -26,13 +26,14 @@ export type UsersPageType = {
     currentPage: number
 }
 
-type SendMessageActionType = ReturnType<typeof followUserAC>
+type SetFollowUserActionType = ReturnType<typeof followUserAC>
+type SetUnFollowUserActionType = ReturnType<typeof unFollowUserAC>
 type SetUsersActionType = ReturnType<typeof setUsersAC>
 type SeCurrentPageActionType = ReturnType<typeof setCurrentPageAC>
 type SetTotalUsersCountActionType = ReturnType<typeof setTotalUsersCountAC>
 
 export type UsersReducerActionType =
-    SendMessageActionType | SetUsersActionType | SeCurrentPageActionType | SetTotalUsersCountActionType
+    SetFollowUserActionType | SetUsersActionType | SeCurrentPageActionType | SetTotalUsersCountActionType | SetUnFollowUserActionType
 
 const initialState: UsersPageType = {
     items: [] as UserType[],
@@ -45,9 +46,16 @@ const initialState: UsersPageType = {
 
 export const usersReducer = (state: UsersPageType = initialState, action: UsersReducerActionType): UsersPageType => {
     switch (action.type) {
-        case "FOLLOW":
+        case "FOLLOW":{
+            console.log(1)
             return {...state, items: state.items.map(user => user.id === action.payload.userId
-                ? {...user,  followed: !action.payload.isFollow}
+                    ? {...user,  followed: true}
+                    : user)}
+        }
+
+         case "UN-FOLLOW":
+            return {...state, items: state.items.map(user => user.id === action.payload.userId
+                ? {...user,  followed: false}
                 : user)}
         case "SET-USERS":
             return (
@@ -60,9 +68,13 @@ export const usersReducer = (state: UsersPageType = initialState, action: UsersR
     }
 }
 
-export const followUserAC = (userId: number, isFollow: boolean) => {
-    return {type: 'FOLLOW', payload: {userId, isFollow}} as const
+export const followUserAC = (userId: number) => {
+    return {type: 'FOLLOW', payload: {userId}} as const
 }
+export const unFollowUserAC = (userId: number) => {
+    return {type: 'UN-FOLLOW', payload: {userId}} as const
+}
+
 export const setUsersAC = (users: UserType[]) => {
     return {type: 'SET-USERS', payload: {users}} as const
 }

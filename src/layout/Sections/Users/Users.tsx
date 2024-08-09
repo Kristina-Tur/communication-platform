@@ -11,13 +11,16 @@ import Typography from "@mui/material/Typography";
 import {Loader} from "../../../components/loader/Loader";
 import {useSelector} from "react-redux";
 import {AppRootStateType} from "../../../redux/store-redux";
+import {NavLink} from "react-router-dom";
+import {instance} from "../../../api/API";
 
 type UsersPropsType = {
     users: UserType[]
     pageSize: number
     totalUsersCount: number
     currentPage: number
-    handleFollowUser: (userId: number, isFollow: boolean) => void
+    followUser: (userId: number) => void
+    unFollowUser: (userId: number) => void
     handlePageChange: (page: number) => void
 
 };
@@ -25,7 +28,8 @@ export const Users = ({
                           users,
                           currentPage,
                           pageSize,
-                          handleFollowUser,
+                          followUser,
+                          unFollowUser,
                           totalUsersCount,
                           handlePageChange
                       }: UsersPropsType) => {
@@ -60,11 +64,12 @@ export const Users = ({
         pages.push(i);
     }
     const isLoading = useSelector<AppRootStateType, boolean>(state => state.app.isLoading)
+    console.log(users)
     return (
         <StyledSection>
             <h1>Users</h1>
             <div>
-                {isLoading && <Loader/> }
+                {isLoading && <Loader/>}
                 <div className="pagination">
                     {pages.map((page, index) => (
                         <button
@@ -82,11 +87,41 @@ export const Users = ({
                         <Box key={user.id} width="100%" p={2} display="flex" alignItems="center"
                              justifyContent="space-between">
                             <Box width="25%" display="flex" flexDirection="column" alignItems="center">
-                                <Avatar alt={'user'} src={user.photos.small === null ? avatar : user.photos.small}
-                                        sx={{width: 100, height: 100, mb: 2}}/>
-                                <Button variant="contained" sx={{mt: 2}}
-                                        onClick={() => handleFollowUser(user.id, user.followed)}>{user.followed ? 'Follow' : 'Unfollow'}
-                                </Button>
+                                <NavLink to={'/profile/' + user.id}>
+                                    <Avatar alt={'user'} src={user.photos.small === null ? avatar : user.photos.small}
+                                            sx={{width: 100, height: 100, mb: 2}}/>
+                                </NavLink>
+                                {user.followed ?
+                                    <Button variant="contained" sx={{mt: 2}}
+                                            onClick={() => {
+                                                instance.delete(`follow/${user.id}`)
+                                                    .then(res => {
+                                                            if (res.data.resultCode === 0) {
+                                                                unFollowUser(user.id)
+                                                            }
+                                                        }
+                                                    )
+                                                    .catch(rej => console.log(rej));
+                                            }}
+                                    >
+                                        Unfollow
+                                    </Button>
+
+                                    : <Button variant="contained" sx={{mt: 2}}
+                                onClick={() => {
+                                    instance.post(`follow/${user.id}`, {})
+                                        .then(res => {
+                                                if (res.data.resultCode === 0) {
+                                                    followUser(user.id)
+                                                }
+                                            }
+                                        )
+                                        .catch(rej => console.log(rej));
+                                }}
+                            >
+                                Follow
+                            </Button>
+                                }
                             </Box>
                             <Divider orientation="vertical" flexItem sx={{mx: 2}}/>
                             <Box width="70%">
@@ -113,8 +148,8 @@ export const Users = ({
     );
 };
 
-const StyledSection = styled.div`
+const StyledSection = styled.section`
     flex-grow: 1;
-    height: calc(100vh - 60px);
+    min-height: calc(100vh - 60px);
     background-color: #c8e0ff33;
 `
