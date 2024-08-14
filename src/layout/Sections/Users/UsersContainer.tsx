@@ -1,20 +1,17 @@
-import {AnyAction, Dispatch} from "redux";
 import {connect} from "react-redux";
-import {UsersFunc} from "./UsersFunc";
 import {RootState} from "../../../redux/store-redux";
 import {
     followUserAC,
     setCurrentPageAC,
     setTotalUsersCountAC,
     setUsersAC,
-    UsersPageType,
+    unFollowUserAC,
     UserType
 } from "../../../redux/users-reducer";
-import axios from "axios";
 import React, {Component} from "react";
 import {Users} from "./Users";
 import {setAppLoaderAC} from "../../../redux/app-reducer";
-import {instance} from "../../../api/API";
+import {UsersApi} from "../../../api/API";
 
 
 type UsersProps = {
@@ -22,13 +19,13 @@ type UsersProps = {
     pageSize: number
     totalUsersCount: number
     currentPage: number
-    followUser: (userId: number, isFollow: boolean) => void
+    followUser: (userId: number) => void
+    unFollowUser: (userId: number) => void
     setUsers: (users: UserType[]) => void
     setCurrentPage: (currentPage: number) => void
     setTotalUsersCount: (totalUsersCount: number) => void
     setAppLoading: (isLoading: boolean) => void
 }
-
 
 
 export class UsersAPIComponent extends Component<UsersProps, any> {
@@ -45,19 +42,21 @@ export class UsersAPIComponent extends Component<UsersProps, any> {
     }
 
     fetchUsers = (currentPage: number) => {
-
-        instance.get(`users?page=${currentPage}&count=${this.props.pageSize}`)
-            .then(res => {
+        UsersApi.fetchUsers(currentPage, this.props.pageSize)
+            .then(data => {
                 this.props.setAppLoading(false)
-                this.props.setUsers(res.data.items);
-                this.props.setTotalUsersCount(res.data.totalCount);
+                this.props.setUsers(data.items);
+                this.props.setTotalUsersCount(data.totalCount);
 
             })
-            .catch(rej => console.log(rej));
+            .catch(e => console.log(e));
     }
 
-    handleFollowUser = (userId: number, isFollow: boolean) => {
-        this.props.followUser(userId, isFollow);
+    followUser = (userId: number) => {
+        this.props.followUser(userId);
+    }
+    unFollowUser = (userId: number) => {
+        this.props.unFollowUser(userId);
     }
 
     handlePageChange = (page: number) => {
@@ -70,7 +69,8 @@ export class UsersAPIComponent extends Component<UsersProps, any> {
                    pageSize={this.props.pageSize}
                    totalUsersCount={this.props.totalUsersCount}
                    currentPage={this.props.currentPage}
-                   handleFollowUser={this.handleFollowUser}
+                   followUser={this.followUser}
+                   unFollowUser={this.unFollowUser}
                    handlePageChange={this.handlePageChange}
             />
         );
@@ -89,6 +89,7 @@ const mapStateToProps = (state: RootState) => {
 
 export const UsersContainer = connect(mapStateToProps, {
     followUser: followUserAC,
+    unFollowUser: unFollowUserAC,
     setUsers: setUsersAC,
     setCurrentPage: setCurrentPageAC,
     setTotalUsersCount: setTotalUsersCountAC,
