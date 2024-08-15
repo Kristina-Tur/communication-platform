@@ -1,4 +1,6 @@
 import {v1} from "uuid";
+import {Dispatch} from "redux";
+import {ProfileApi} from "../api/API";
 
 export type ProfileType = {
     aboutMe: string
@@ -73,6 +75,16 @@ export const updatePostTextAC = (value: string) => {
     return {type: 'UPDATE-POST-TEXT', value} as const
 }
 export const setUserProfileAC = (profile: ProfileType) => {
-    console.log(1)
     return {type: 'SET-USER-PROFILE', profile} as const
+}
+
+export const getUserProfileTC = (userId: number) => {
+    return (dispatch: Dispatch) => {
+        ProfileApi.getUserProfile(userId)
+            .then(res => {
+                dispatch(setUserProfileAC(res.data))
+
+            })
+            .catch(e => console.log(e));
+    }
 }

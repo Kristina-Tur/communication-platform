@@ -1,4 +1,5 @@
-import {UserType} from "./users-reducer";
+import {Dispatch} from "redux";
+import {AuthApi} from "../api/API";
 
 export type AuthDataType = {
     id: number
@@ -31,3 +32,16 @@ export const setIsAuth = (isAuth: boolean) => {
     return {type: 'SET-IS-AUTH', isAuth} as const
 }
 type AuthActionType = ReturnType<typeof setAuthUserData> | ReturnType<typeof setIsAuth>
+
+export const setIsAuthTC = () => {
+    return (dispatch: Dispatch) => {
+        AuthApi.me()
+            .then(data => {
+                if (data.resultCode === 0) {
+                    dispatch(setIsAuth(true))
+                    dispatch(setAuthUserData(data.data))
+                }
+            })
+            .catch(e => console.log(e));
+    }
+}
