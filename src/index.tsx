@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import App from './app/App';
 import {ThemeProvider} from "styled-components";
-import {Theme} from "./styles/Theme";
-import {GlobalStyles} from "./styles/GlobalStyles";
+import {Theme} from "./app/styles/Theme";
+import {GlobalStyles} from "./app/styles/GlobalStyles";
 import {BrowserRouter} from "react-router-dom";
-import {store} from './redux/store-redux'
+import {store} from './app/store-redux'
 import {Provider} from "react-redux";
 
 /*let rerenderEntireTree = () => {*/
