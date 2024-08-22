@@ -12,15 +12,19 @@ import {ProfileType} from "../../../../model/profile-reducer";
 import {Loader} from "../../../../../../common/components/loader/Loader";
 
 type Props = {
-    profile: ProfileType | null;
+    profile: null | ProfileType
 };
 export const ProfileCard = ({profile}: Props) => {
-    if(!profile){
+    if (!profile) {
         return <Loader/>
     }
-    if(!profile.photos.small || !profile.photos.large){
-        profile.photos = {small: avatar, large: avatar}
+
+    if (!profile.photos?.small || !profile.photos?.large) {
+       // profile.photos = {small: avatar, large: avatar}
+        profile = {...profile, photos: {small: avatar, large: avatar}}
     }
+
+
     console.log('Profile Data:', profile);
     return (
         <Card sx={CardSx}>

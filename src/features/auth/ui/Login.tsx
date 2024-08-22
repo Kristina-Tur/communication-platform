@@ -1,4 +1,4 @@
-import React from "react"
+import React, {FormEvent} from "react"
 import Grid from "@mui/material/Grid"
 import Checkbox from "@mui/material/Checkbox"
 import FormControl from "@mui/material/FormControl"
@@ -8,7 +8,11 @@ import FormLabel from "@mui/material/FormLabel"
 import TextField from "@mui/material/TextField"
 import Button from "@mui/material/Button"
 import { useFormik } from "formik"
-import {Redirect} from "react-router-dom";
+import { Redirect } from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux"
+import { AppRootStateType } from "../../../app/store-redux"
+import { loginTC } from "../model/auth-reducer"
+import styled from "styled-components";
 
 type FormikErrorType = {
   email?: string
@@ -17,7 +21,10 @@ type FormikErrorType = {
 }
 
 export const Login = () => {
-  /*const formik = useFormik({
+  const dispatch = useDispatch()
+  const isLoginIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoginIn)
+
+  const formik = useFormik({
     initialValues: {
       email: "",
       password: "",
@@ -25,7 +32,6 @@ export const Login = () => {
     },
     validate: (values) => {
       const errors: FormikErrorType = {}
-      //проверка фронта для ввода корректного мэйла и пароля, без запроса на сервер
       if (!values.email.trim()) {
         errors.email = "Required"
       } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
@@ -39,56 +45,50 @@ export const Login = () => {
       return errors
     },
     onSubmit: (values, formikHelpers) => {
-      dispatch(login({ values }))
-        //.unwrap() используем в Redux Toolkit , читать документацию. санка createAsyncThunk возвращает всегда зарезолвленный промис
-        .unwrap()
-        //проверка из зарежджектного промиса для ввода корректного мэйла и пароля
-        .catch((error: BaseResponse) => {
-          if (error.fieldsErrors) {
-            error.fieldsErrors.forEach((el) => formikHelpers.setFieldError(el.field, el.error))
-          }
-        })
-      //formik.resetForm()
+      console.log(1)
+       //dispatch(loginTC(values))
     },
-  })*/
+  })
+  const onSubmitHandler = (e: FormEvent ) =>{
+    e.preventDefault()
+    dispatch(loginTC(formik.values))
+  }
 
-  /*if (isLoggedIn) {
-    return <Redirect to={"/"} />
-  }*/
+  if (isLoginIn) {
+    return <Redirect to={"/profile"} />
+  }
 
   return (
-      <div>Login</div>
-    /*<Grid container justifyContent={"center"}>
-      <Grid item justifyContent={"center"}>
-        <form onSubmit={formik.handleSubmit}>
-          <FormControl>
-            <FormLabel>
-              <p>
-                To log in get registered
-                <a href={"https://social-network.samuraijs.com/"} target={"_blank"}>
-                  here
-                </a>
-              </p>
-              <p>or use common test account credentials:</p>
-              <p>Email: free@samuraijs.com</p>
-              <p>Password: free</p>
-            </FormLabel>
-            <FormGroup>
-              <TextField label="Email" margin="normal" {...formik.getFieldProps("email")} />
-              {formik.touched && formik.errors.email && <div style={{ color: "red" }}>{formik.errors.email}</div>}
-              <TextField type="password" label="Password" margin="normal" {...formik.getFieldProps("password")} />
-              {formik.touched && formik.errors.password && <div style={{ color: "red" }}>{formik.errors.password}</div>}
-              <FormControlLabel
-                label={"Remember me"}
-                control={<Checkbox checked={formik.values.rememberMe} {...formik.getFieldProps("rememberMe")} />}
-              />
-              <Button type={"submit"} variant={"contained"} color={"primary"}>
-                Login
-              </Button>
-            </FormGroup>
-          </FormControl>
-        </form>
+      <Grid container justifyContent={"center"}>
+        <Grid item justifyContent={"center"}>
+          {/*<form onSubmit={formik.handleSubmit}>*/}
+          <form onSubmit={onSubmitHandler}>
+            <FormControl>
+              <FormLabel>
+                <p>Use common test account credentials:</p>
+                <p>Email: free@samuraijs.com</p>
+                <p>Password: free</p>
+              </FormLabel>
+              <FormGroup>
+                <TextField label="Email" margin="normal" {...formik.getFieldProps("email")} />
+                {formik.touched && formik.errors.email && <TitleError>{formik.errors.email}</TitleError>}
+                <TextField type="password" label="Password" margin="normal" {...formik.getFieldProps("password")} />
+                {formik.touched && formik.errors.password && <TitleError>{formik.errors.password}</TitleError>}
+                <FormControlLabel
+                    label={"Remember me"}
+                    control={<Checkbox checked={formik.values.rememberMe} {...formik.getFieldProps("rememberMe")} />}
+                />
+                <Button type={"submit"} variant={"contained"} color={"primary"}>
+                  Login
+                </Button>
+              </FormGroup>
+            </FormControl>
+          </form>
+        </Grid>
       </Grid>
-    </Grid>*/
   )
 }
+const TitleError = styled.div`
+  color: red;
+  font-size: 14px;
+`

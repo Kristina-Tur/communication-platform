@@ -3,13 +3,6 @@ import {UsersApi} from "../../api/API";
 import {setAppLoaderAC} from "../../../app/app-reducer";
 
 export type UserType = {
-    /*id: string
-    name: string
-    avatar: string
-    isFollow: boolean
-    status: string
-    country: string
-    city: string*/
     name: string
     id: number
     photos: {
@@ -21,8 +14,6 @@ export type UserType = {
 }
 export type UsersPageType = {
     items: UserType[]
-    /*totalCount: number
-    error: null*/
     pageSize: number
     totalUsersCount: number
     currentPage: number
@@ -47,8 +38,6 @@ export type UsersReducerActionType =
 
 const initialState: UsersPageType = {
     items: [] as UserType[],
-    /*totalCount: 5,
-    error: null,*/
     pageSize: 3,
     totalUsersCount: 0,
     currentPage: 1,
@@ -115,10 +104,10 @@ export const getUsersTC = (currentPage: number, pageSize: number) => {
     return (dispatch: Dispatch) => {
         dispatch(setAppLoaderAC(true))
         UsersApi.fetchUsers(currentPage, pageSize)
-            .then(data => {
+            .then(res => {
                 dispatch(setAppLoaderAC(false))
-                dispatch(setUsersAC(data.items))
-                dispatch(setTotalUsersCountAC(data.totalCount))
+                dispatch(setUsersAC(res.data.items))
+                dispatch(setTotalUsersCountAC(res.data.totalCount))
 
             })
             .catch(e => console.log(e));

@@ -5,9 +5,10 @@ import React, {Component} from "react";
 import {Users} from "./Users";
 import {withAuthRedirect} from "../../../../../common/hok/withAuthRedirect";
 import {Messages} from "../messages/Messages";
+import {Redirect} from "react-router-dom";
 
 
-type UsersProps = {
+type Props = {
     users: UserType[]
     pageSize: number
     totalUsersCount: number
@@ -17,15 +18,19 @@ type UsersProps = {
     getUsers: (currentPage: number, pageSize: number) => void
     follow: (userId: number) => void
     unFollow: (userId: number) => void
+    isLoginIn: boolean
 }
 
 
-export class UsersAPIComponent extends Component<UsersProps, any> {
+export class UsersAPIComponent extends Component<Props, any> {
     componentDidMount() {
+        if (!this.props.isLoginIn) {
+            return
+        }
         this.fetchUsers(this.props.currentPage);
     }
 
-    componentDidUpdate(prevProps: UsersProps) {
+    componentDidUpdate(prevProps: Props) {
         if (prevProps.currentPage !== this.props.currentPage) {
             this.fetchUsers(this.props.currentPage);
         }
@@ -40,6 +45,9 @@ export class UsersAPIComponent extends Component<UsersProps, any> {
     }
 
     render() {
+        if (!this.props.isLoginIn) {
+            return <Redirect to={"/login"} />;
+        }
         return (
             <Users users={this.props.users}
                    pageSize={this.props.pageSize}
@@ -60,7 +68,8 @@ const mapStateToProps = (state: RootState) => {
         pageSize: state.usersPage.pageSize,
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
-        followingInProgress: state.usersPage.followingInProgress
+        followingInProgress: state.usersPage.followingInProgress,
+        isLoginIn: state.auth.isLoginIn
     }
 }
 

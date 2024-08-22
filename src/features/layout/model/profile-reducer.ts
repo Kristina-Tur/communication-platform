@@ -31,7 +31,8 @@ export type PostsType = {
 export type ProfilePageType = {
     posts: PostsType[]
     postText: string
-    profile: ProfileType | null
+    profile: null | ProfileType
+    status: string
 }
 
 type AddPostActionType = ReturnType<typeof addPostAC>
@@ -39,7 +40,8 @@ type UpdatePostTextActionType = ReturnType<typeof updatePostTextAC>
 export type ProfilePageActionType =
     AddPostActionType |
     UpdatePostTextActionType |
-    ReturnType<typeof setUserProfileAC>
+    ReturnType<typeof setUserProfileAC> |
+    ReturnType<typeof setStatusAC>
 
 const initialState = {
     posts: [
@@ -47,7 +49,8 @@ const initialState = {
         {id: v1(), postText: ' Lorem ipsum dolor sit amet'},
     ],
     postText: '',
-    profile: null
+    profile: null,
+    status: ''
 }
 
 export const profileReducer = (state: ProfilePageType = initialState, action: ProfilePageActionType) => {
@@ -62,6 +65,10 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Pr
         case "SET-USER-PROFILE": {
             return {...state, profile: action.profile}
         }
+        case "SET-STATUS": {
+            return {...state, status: action.status}
+        }
+
         default :
             return state
     }
@@ -76,14 +83,41 @@ export const updatePostTextAC = (value: string) => {
 export const setUserProfileAC = (profile: ProfileType) => {
     return {type: 'SET-USER-PROFILE', profile} as const
 }
+export const setStatusAC = (status: string) => {
+    return {type: 'SET-STATUS', status} as const
+}
 
 export const getUserProfileTC = (userId: number) => {
     return (dispatch: Dispatch) => {
         ProfileApi.getUserProfile(userId)
             .then(res => {
+                console.log('Profile response:', res);
                 dispatch(setUserProfileAC(res.data))
 
             })
             .catch(e => console.log(e));
     }
 }
+export const getStatusTC = (userId: number) => {
+    return (dispatch: Dispatch) => {
+        ProfileApi.getStatus(userId)
+            .then(res => {
+                console.log(res)
+                dispatch(setStatusAC(res.data))
+
+            })
+            .catch(e => console.log(e));
+    }
+}
+export const updateStatusTC = (status: string) => {
+    return (dispatch: Dispatch) => {
+        ProfileApi.updateStatus(status)
+            .then(res => {
+                if (res.data.resultCode === 0){
+                    dispatch(setStatusAC(status))
+            }
+            })
+            .catch(e => console.log(e));
+    }
+}
+

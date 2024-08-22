@@ -6,23 +6,34 @@ import {Theme} from "../../../../../app/styles/Theme";
 import {Section} from "../../../../../common/components/Section";
 import {PostInputFieldContainer} from "./PostInputField/PostInputFieldContainer";
 import {PostsType, ProfileType} from "../../../model/profile-reducer";
-import {Redirect} from "react-router-dom";
-import {Navigation} from "@mui/icons-material";
+import {StatusCard} from "./StatusCard/StatusCard";
+import {Loader} from "../../../../../common/components/loader/Loader";
+import React from "react";
 
 
 type ProfilePropsType = {
     posts: PostsType[]
-    profile: ProfileType | null;
+    profile: null | ProfileType
+    status: string
+    updateStatus: (status: string) => void;
 }
 
-export const Profile = ({posts, profile}: ProfilePropsType) => {
+export const Profile = ({posts, profile, status, updateStatus}: ProfilePropsType) => {
+
+    if(!profile){
+        return <Loader/>
+    }
 
     return (
         <Section>
             <Container>
                 <BoxWrapper>
                     <ProfileCard profile={profile}/>
-                    <PostInputFieldContainer/>
+                    <Wrapper>
+                        <StatusCard userName={'lll'} status={status} updateStatus={updateStatus}/>
+                        <PostInputFieldContainer/>
+                    </Wrapper>
+
                 </BoxWrapper>
                 <PostsWrapper>
                     {posts.map(post => <Post key={post.id} postText={post.postText}/>)}
@@ -49,4 +60,8 @@ const PostsWrapper = styled.div`
     max-width: 1170px;
     width: 100%;
     margin: 50px auto;
+`
+const Wrapper = styled.div`
+    max-width: 500px;
+    width: 100%;
 `

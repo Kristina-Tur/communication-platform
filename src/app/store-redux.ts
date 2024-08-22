@@ -5,7 +5,7 @@ import {sidebarReducer} from "../features/layout/model/sidebar-reducer";
 import {SidebarType} from "../features/layout/ui/sections/sidebar/Sidebar";
 import {UsersPageType, usersReducer} from "../features/layout/model/users-reducer";
 import {appReducer, AppType} from "./app-reducer";
-import {AuthDataType, authReducer} from "../features/auth/model/auth-reducer";
+import {authReducer, initialStateType} from "../features/auth/model/auth-reducer";
 import thunk from "redux-thunk";
 
 export type AppRootStateType = ReturnType<typeof reducers>
@@ -16,7 +16,7 @@ export type RootState = CombinedState<{
     messagesPage: MessagesPageType;
     usersPage: UsersPageType;
     app: AppType
-    auth: AuthDataType
+    auth: initialStateType
 }>;
 
 const reducers = combineReducers({

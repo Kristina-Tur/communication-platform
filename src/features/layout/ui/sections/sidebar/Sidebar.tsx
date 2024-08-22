@@ -27,10 +27,7 @@ type IconsType = {
 const icons: IconsType = {
     'Profile': <AccountCircleIcon />,
     'Messages': <MailIcon />,
-    'Users': <GroupIcon />,
-    'News': <NewspaperIcon />,
-    'Music': <MusicNoteIcon />,
-    'Settings': <SettingsIcon />,
+    'Users': <GroupIcon />
 };
 export const Sidebar = () => {
     const sidebarMenu = useSelector<AppRootStateType, MenuType[]>(state => state.sidebar.menu)

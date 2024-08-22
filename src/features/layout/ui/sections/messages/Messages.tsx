@@ -4,13 +4,19 @@ import {MessageFormContainer} from "./MessageForm/MessageFormContainer";
 import {DialogsContainer} from "./Dialogs/DialogsContainer";
 import {MessageListContainer} from "./MessageList/MessageListContainer";
 import {Redirect} from "react-router-dom";
+import React from "react";
+import {useSelector} from "react-redux";
+import {AppRootStateType} from "../../../../../app/store-redux";
 
 type MessagesProps = {
     isAuth: boolean
 }
 
 export const Messages = ({isAuth}: MessagesProps) => {
-
+    const isLoginIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoginIn)
+    if (!isLoginIn) {
+        return <Redirect to={"/login"} />;
+    }
     return (
         <StyledSection>
             <Container>
