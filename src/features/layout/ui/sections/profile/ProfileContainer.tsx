@@ -23,6 +23,7 @@ type ProfileContainerProps = RouteComponentProps<{ userId: string }> & {
     isAuth: boolean
     isLoginIn: boolean
     status: string
+    userId: number
     getUserProfile: (userId: number) => void;
     getStatus: (userId: number) => void;
     updateStatus: (status: string) => void;
@@ -36,7 +37,7 @@ class ProfileAPIContainer extends React.Component<ProfileContainerProps, Profile
     componentDidMount() {
         let userId = +this.props.match.params.userId
         if(!userId){
-            userId = 31392
+            userId = this.props.userId
         }
         if (!this.props.isLoginIn) {
             return
@@ -62,7 +63,8 @@ const mapStateToProps = (state: RootState) => {
         profile: state.profilePage.profile,
         isAuth: state.auth.isAuth,
         isLoginIn: state.auth.isLoginIn,
-        status: state.profilePage.status
+        status: state.profilePage.status,
+        userId: state.auth.id
     }
 }
 

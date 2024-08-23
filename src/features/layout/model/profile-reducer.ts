@@ -1,6 +1,8 @@
 import {v1} from "uuid";
 import {Dispatch} from "redux";
 import {ProfileApi} from "../../api/API";
+import {handleServerNetworkError} from "../../../common/utils/handleServerNetworkError";
+import {handleServerAppError} from "../../../common/utils/handleServerAppError";
 
 export type ProfileType = {
     aboutMe: string
@@ -91,33 +93,31 @@ export const getUserProfileTC = (userId: number) => {
     return (dispatch: Dispatch) => {
         ProfileApi.getUserProfile(userId)
             .then(res => {
-                console.log('Profile response:', res);
-                dispatch(setUserProfileAC(res.data))
-
+                    dispatch(setUserProfileAC(res.data))
             })
-            .catch(e => console.log(e));
+            .catch(e =>  handleServerNetworkError(e, dispatch));
     }
 }
 export const getStatusTC = (userId: number) => {
     return (dispatch: Dispatch) => {
         ProfileApi.getStatus(userId)
             .then(res => {
-                console.log(res)
                 dispatch(setStatusAC(res.data))
-
             })
-            .catch(e => console.log(e));
+            .catch(e =>  handleServerNetworkError(e, dispatch))
     }
 }
 export const updateStatusTC = (status: string) => {
     return (dispatch: Dispatch) => {
         ProfileApi.updateStatus(status)
             .then(res => {
-                if (res.data.resultCode === 0){
+                if (res.data.resultCode === 0) {
                     dispatch(setStatusAC(status))
-            }
+                }else{
+                    handleServerAppError(res.data, dispatch)
+                }
             })
-            .catch(e => console.log(e));
+            .catch(e =>  handleServerNetworkError(e, dispatch))
     }
 }
 

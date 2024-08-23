@@ -25,11 +25,11 @@ function App() {
             dispatch(setIsAuthTC())
         }
     }, [dispatch, isLoginIn]);
-    /*if (!isAuth) {
+    if (!isAuth) {
         return (
                 <Loader/>
         )
-    }*/
+    }
     return (
         <div>
             <Header/>

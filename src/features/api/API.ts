@@ -45,10 +45,10 @@ export const ProfileApi = {
         return instance.get<ProfileType>(`profile/` + userId)
     },
     getStatus(userId: number) {
-        return instance.get(`profile/status/` + userId)
+        return instance.get<string>(`profile/status/` + userId)
     },
     updateStatus(status: string) {
-        return instance.put(`profile/status`, {status})
+        return instance.put<BaseResponse>(`profile/status`, {status})
     },
 
 }
