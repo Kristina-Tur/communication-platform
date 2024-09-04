@@ -1,9 +1,10 @@
 import {Action, AnyAction, Dispatch} from "redux";
 import {AuthApi, AuthResponse} from "../../api/API";
 import {ThunkDispatch} from "redux-thunk";
-import {AppRootStateType} from "../../../app/store-redux";
+import {AppRootStateType, ThunkCreatorType} from "../../../app/store-redux";
 import {handleServerAppError} from "../../../common/utils/handleServerAppError";
 import {handleServerNetworkError} from "../../../common/utils/handleServerNetworkError";
+import {AxiosPromise} from "axios";
 
 export type initialStateType = {
     id: number
@@ -51,14 +52,25 @@ export const setIsLoggedInAC = (isLoginIn: boolean) => {
 
 type AuthActionType = ReturnType<typeof setAuthUserData> | ReturnType<typeof setIsAuth> | ReturnType<typeof setIsLoggedInAC>
 
-export const setIsAuthTC = () => {
+/*export const setIsAuthTC = () => {
+    return (dispatch: any ) => {
+         let promise: Promise<AuthResponse> = dispatch(getAuthUserDataTC() )
+            promise.then(() => {
+                dispatch(setIsAuth(true))
+                dispatch(setIsLoggedInAC(true))
+            })
+    }
+}*/
+
+export const getAuthUserDataTC = () => {
     return (dispatch: Dispatch) => {
         AuthApi.me()
             .then(res => {
                 if (res.data.resultCode === 0) {
+                    dispatch(setAuthUserData(res.data.data))
                     dispatch(setIsAuth(true))
                     dispatch(setIsLoggedInAC(true))
-                    dispatch(setAuthUserData(res.data.data))
+
                 }
             })
             .catch(e => console.log(e));

@@ -6,6 +6,13 @@ import {Users} from "./Users";
 import {withAuthRedirect} from "../../../../../common/hok/withAuthRedirect";
 import {Messages} from "../messages/Messages";
 import {Redirect} from "react-router-dom";
+import {
+    getCurrentPage,
+    getFollowingInProgress, getIsLoginIn,
+    getPageSize,
+    getTotalUsersCount,
+    getUsers
+} from "../../../model/users-selectors";
 
 
 type Props = {
@@ -63,13 +70,14 @@ export class UsersAPIComponent extends Component<Props, any> {
 }
 const authRedirectComponent = withAuthRedirect(UsersAPIComponent)
 const mapStateToProps = (state: RootState) => {
+    console.log('mapStateToProps')
     return {
-        users: state.usersPage.items,
-        pageSize: state.usersPage.pageSize,
-        totalUsersCount: state.usersPage.totalUsersCount,
-        currentPage: state.usersPage.currentPage,
-        followingInProgress: state.usersPage.followingInProgress,
-        isLoginIn: state.auth.isLoginIn
+        users: getUsers(state),
+        pageSize: getPageSize(state),
+        totalUsersCount:  getTotalUsersCount(state),
+        currentPage:  getCurrentPage(state),
+        followingInProgress:  getFollowingInProgress(state),
+        isLoginIn:  getIsLoginIn(state)
     }
 }
 

@@ -8,7 +8,7 @@ import {Login} from "../features/auth/ui/Login";
 import {MessagesContainer} from "../features/layout/ui/sections/messages/MessagesContainer";
 import {ProfileContainer} from "../features/layout/ui/sections/profile/ProfileContainer";
 import {useEffect} from "react";
-import {setIsAuthTC} from "../features/auth/model/auth-reducer";
+import {getAuthUserDataTC} from "../features/auth/model/auth-reducer";
 import {useDispatch, useSelector} from "react-redux";
 import {Header} from "../features/layout/ui/header/Header";
 import {AppRootStateType} from "./store-redux";
@@ -22,7 +22,7 @@ function App() {
     const isAuth = useSelector<AppRootStateType, boolean>(state => state.auth.isAuth)
     useEffect(() => {
         if (!isLoginIn) {
-            dispatch(setIsAuthTC())
+            dispatch(getAuthUserDataTC())
         }
     }, [dispatch, isLoginIn]);
     if (!isAuth) {
