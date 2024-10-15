@@ -49,7 +49,7 @@ const initialState = {
                     name: 'Some Name',
                 },
                 messageText: {
-                    text: 'some textsome textsome textsome textsome textsome textsome text',
+                    text: 'Hello',
                     time: '22:00'
                 }
             }
