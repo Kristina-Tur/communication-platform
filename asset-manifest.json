@@ -1,17 +1,16 @@
 {
   "files": {
-    "main.css": "/samurai-way-main/static/css/main.b4877751.css",
-    "main.js": "/samurai-way-main/static/js/main.1f0a29c3.js",
-    "static/media/bg.png": "/samurai-way-main/static/media/bg.2248e9c09bba65aea88d.png",
-    "static/media/avatar.png": "/samurai-way-main/static/media/avatar.d947cb9d0d13765666b6.png",
-    "static/media/avatar.svg": "/samurai-way-main/static/media/avatar.5ab549f8293e15e8b7724b5534412eae.svg",
-    "static/media/twitterLOGO.svg": "/samurai-way-main/static/media/twitterLOGO.e0cf1fcc791b8372662dcb30b67c2020.svg",
-    "index.html": "/samurai-way-main/index.html",
-    "main.b4877751.css.map": "/samurai-way-main/static/css/main.b4877751.css.map",
-    "main.1f0a29c3.js.map": "/samurai-way-main/static/js/main.1f0a29c3.js.map"
+    "main.css": "/Communication-platform/static/css/main.ece6859f.css",
+    "main.js": "/Communication-platform/static/js/main.cd863309.js",
+    "static/media/bg.png": "/Communication-platform/static/media/bg.2248e9c09bba65aea88d.png",
+    "static/media/avatar.png": "/Communication-platform/static/media/avatar.d947cb9d0d13765666b6.png",
+    "static/media/avatar.svg": "/Communication-platform/static/media/avatar.5ab549f8293e15e8b7724b5534412eae.svg",
+    "index.html": "/Communication-platform/index.html",
+    "main.ece6859f.css.map": "/Communication-platform/static/css/main.ece6859f.css.map",
+    "main.cd863309.js.map": "/Communication-platform/static/js/main.cd863309.js.map"
   },
   "entrypoints": [
-    "static/css/main.b4877751.css",
-    "static/js/main.1f0a29c3.js"
+    "static/css/main.ece6859f.css",
+    "static/js/main.cd863309.js"
   ]
 }
